@@ -19,8 +19,8 @@ let applications = [
   { 
     _id: '1', 
     applicationId: '#APP-2024-001', 
-    studentName: 'John Doe',
-    email: 'john@example.com',
+    studentName: 'Palak Ojha',
+    email: 'palak.ojha@example.com',
     program: 'B.S. Computer Science', 
     department: 'Engineering', 
     coursePreferences: [
@@ -39,8 +39,8 @@ let applications = [
   { 
     _id: '2', 
     applicationId: '#APP-2024-002', 
-    studentName: 'Jane Smith',
-    email: 'jane@example.com',
+    studentName: 'Palak Ojha',
+    email: 'palak.ojha@example.com',
     program: 'B.A. Business Administration', 
     department: 'Business', 
     coursePreferences: [
@@ -59,8 +59,8 @@ let applications = [
   { 
     _id: '3', 
     applicationId: '#APP-2024-003', 
-    studentName: 'Bob Johnson',
-    email: 'bob@example.com',
+    studentName: 'Palak Ojha',
+    email: 'palak.ojha@example.com',
     program: 'B.S. Electrical Engineering', 
     department: 'Engineering', 
     coursePreferences: [
@@ -83,8 +83,8 @@ let payments = [
     _id: '1',
     applicationId: '#APP-2024-001',
     studentId: '1',
-    studentName: 'John Doe',
-    email: 'john@example.com',
+    studentName: 'Palak Ojha',
+    email: 'palak.ojha@example.com',
     amount: 500,
     currency: 'INR',
     razorpayOrderId: 'order_test_123456789',
@@ -99,8 +99,8 @@ let payments = [
     _id: '2',
     applicationId: '#APP-2024-002',
     studentId: '2',
-    studentName: 'Jane Smith',
-    email: 'jane@example.com',
+    studentName: 'Palak Ojha',
+    email: 'palak.ojha@example.com',
     amount: 500,
     currency: 'INR',
     razorpayOrderId: 'order_test_987654321',
