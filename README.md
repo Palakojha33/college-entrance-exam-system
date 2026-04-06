@@ -1,3 +1,5 @@
+click here to view the deployed app: https://college-entrance-exam-system.onrender.com
+
 # 🎓 Smart College Admission System
 
 A comprehensive MERN stack application for college admissions with intelligent features including auto merit lists, cut-off predictions, seat allocation, and integrated payment processing.
