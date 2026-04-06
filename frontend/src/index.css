@@ -17,9 +17,9 @@
   --gray-50: #EAEAEF;
   --bg-color: #0A0E27;
   --surface: #1A1E3F;
-  --text-main: #E8E8F0;
+  --text-main: #F5F7FA;
   --text-bright: #00D9FF;
-  --text-muted: #A0A4B8;
+  --text-muted: #C0C4D4;
   --shadow-sm: 0 0 5px rgba(0, 217, 255, 0.1);
   --shadow: 0 0 20px rgba(0, 217, 255, 0.2), 0 0 40px rgba(255, 0, 110, 0.1);
   --shadow-lg: 0 0 30px rgba(0, 217, 255, 0.3), 0 0 60px rgba(255, 0, 110, 0.2);
@@ -208,23 +208,26 @@ a {
   transition: all 0.3s;
   border: none;
   font-size: 0.875rem;
+  color: var(--text-main);
 }
 
 .btn-primary {
   background: linear-gradient(135deg, var(--primary), #00B8CC);
-  color: var(--dark);
+  color: #0A0E27;
   border: 1px solid var(--primary);
   box-shadow: 0 0 15px rgba(0, 217, 255, 0.3);
+  font-weight: 600;
 }
 
 .btn-primary:hover {
   box-shadow: 0 0 25px rgba(0, 217, 255, 0.6);
   transform: translateY(-2px);
+  color: #0A0E27;
 }
 
 .btn-outline {
   background-color: transparent;
-  color: var(--primary);
+  color: var(--text-bright);
   border: 2px solid var(--primary);
   box-shadow: 0 0 10px rgba(0, 217, 255, 0.2);
 }
@@ -232,6 +235,7 @@ a {
 .btn-outline:hover {
   background: rgba(0, 217, 255, 0.1);
   box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
+  color: var(--text-bright);
 }
 
 .table-container {
@@ -266,6 +270,10 @@ td {
   color: var(--text-main);
 }
 
+tr {
+  color: var(--text-main);
+}
+
 .badge {
   padding: 0.25rem 0.75rem;
   border-radius: 9999px;
@@ -280,9 +288,9 @@ td {
 
 /* Form Elements */
 input, textarea, select {
-  background-color: var(--gray-700);
+  background-color: rgba(26, 30, 63, 0.8);
   color: var(--text-main);
-  border: 1px solid rgba(0, 217, 255, 0.2);
+  border: 1px solid rgba(0, 217, 255, 0.3);
   border-radius: var(--radius-md);
   padding: 0.5rem 0.75rem;
   font-family: inherit;
@@ -292,9 +300,10 @@ input, textarea, select {
 
 input:focus, textarea:focus, select:focus {
   outline: none;
-  background-color: rgba(0, 217, 255, 0.05);
+  background-color: rgba(0, 217, 255, 0.08);
   border-color: var(--primary);
-  box-shadow: 0 0 15px rgba(0, 217, 255, 0.3);
+  box-shadow: 0 0 15px rgba(0, 217, 255, 0.4);
+  color: var(--text-main);
 }
 
 input::placeholder, textarea::placeholder {
@@ -333,4 +342,38 @@ label {
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(0, 217, 255, 0.6);
+}
+
+/* Text input sections */
+.form-group, .input-field {
+  color: var(--text-main);
+}
+
+.form-group label {
+  color: var(--text-main);
+}
+
+.form-section {
+  background: rgba(26, 30, 63, 0.5);
+  border: 1px solid rgba(0, 217, 255, 0.15);
+  color: var(--text-main);
+}
+
+/* Generic text elements */
+p, span, div, h1, h2, h3, h4, h5, h6 {
+  color: var(--text-main);
+}
+
+h1, h2, h3 {
+  color: var(--text-main);
+}
+
+/* Links */
+a {
+  color: var(--text-bright);
+}
+
+a:hover {
+  color: var(--text-bright);
+  text-decoration: underline;
 }
