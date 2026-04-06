@@ -8,5 +8,8 @@
     "mongodb-memory-server": "^11.0.1",
     "mongoose": "^7.0.0",
     "razorpay": "^2.9.6"
+  },
+  "scripts": {
+    "start": "node server.js"
   }
 }
