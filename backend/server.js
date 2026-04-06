@@ -346,8 +346,13 @@ paymentRoutes.get('/all', (req, res) => {
 
 app.use('/api/payments', paymentRoutes);
 
-app.get('/', (req, res) => {
-  res.send('College Admission Backend API is running');
+const path = require('path');
+
+// Serve frontend in production or if build folder exists
+app.use(express.static(path.join(__dirname, '../frontend/build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../frontend', 'build', 'index.html'));
 });
 
 const PORT = process.env.PORT || 5001;

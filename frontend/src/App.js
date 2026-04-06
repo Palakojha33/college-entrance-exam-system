@@ -66,27 +66,27 @@ function Topbar() {
           <input 
             type="text" 
             placeholder="Search..." 
-            style={{ padding: '0.6rem 1rem 0.6rem 2.5rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--gray-200)', outline: 'none' }} 
+            style={{ padding: '0.6rem 1rem 0.6rem 2.5rem', borderRadius: 'var(--radius-md)', border: '1px solid rgba(0, 217, 255, 0.2)', outline: 'none' }} 
           />
         </div>
         
         <div style={{ position: 'relative' }}>
           <Bell 
             size={24} 
-            color="var(--gray-500)" 
+            color="var(--text-muted)" 
             style={{ cursor: 'pointer' }} 
             onClick={() => { setShowNotifications(!showNotifications); setShowProfile(false); }} 
           />
           {showNotifications && (
-            <div className="card" style={{ position: 'absolute', top: '150%', right: '-50px', width: '320px', zIndex: 100, boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)', border: '1px solid var(--gray-200)' }}>
-              <div style={{ paddingBottom: '0.5rem', borderBottom: '1px solid var(--gray-200)', fontWeight: 600, marginBottom: '0.5rem', color: 'var(--gray-800)' }}>Notifications</div>
-              <div style={{ fontSize: '0.875rem', padding: '0.5rem 0', color: 'var(--gray-600)', borderBottom: '1px solid var(--gray-100)' }}>
+            <div className="card" style={{ position: 'absolute', top: '150%', right: '-50px', width: '320px', zIndex: 100, boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)', border: '1px solid rgba(0, 217, 255, 0.2)' }}>
+              <div style={{ paddingBottom: '0.5rem', borderBottom: '1px solid rgba(0, 217, 255, 0.2)', fontWeight: 600, marginBottom: '0.5rem', color: 'var(--text-main)' }}>Notifications</div>
+              <div style={{ fontSize: '0.875rem', padding: '0.5rem 0', color: 'var(--text-muted)', borderBottom: '1px solid rgba(0, 217, 255, 0.1)' }}>
                 <strong>JEE Main</strong> registration is closing soon!
               </div>
-              <div style={{ fontSize: '0.875rem', padding: '0.5rem 0', color: 'var(--gray-600)', borderBottom: '1px solid var(--gray-100)' }}>
-                Your engineering application is <strong style={{ color: '#D97706' }}>Under Review</strong>.
+              <div style={{ fontSize: '0.875rem', padding: '0.5rem 0', color: 'var(--text-muted)', borderBottom: '1px solid rgba(0, 217, 255, 0.1)' }}>
+                Your engineering application is <strong style={{ color: 'var(--secondary)' }}>Under Review</strong>.
               </div>
-              <div style={{ fontSize: '0.875rem', padding: '0.5rem 0', color: 'var(--gray-600)' }}>
+              <div style={{ fontSize: '0.875rem', padding: '0.5rem 0', color: 'var(--text-muted)' }}>
                 System maintenance scheduled for tomorrow.
               </div>
             </div>
@@ -102,12 +102,12 @@ function Topbar() {
             <User size={20} />
           </div>
           {showProfile && (
-            <div className="card" style={{ position: 'absolute', top: '120%', right: '0', width: '200px', zIndex: 100, boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)', border: '1px solid var(--gray-200)' }}>
-              <div style={{ paddingBottom: '0.5rem', borderBottom: '1px solid var(--gray-200)', fontWeight: 600, marginBottom: '0.5rem', color: 'var(--gray-800)' }}>Student Profile</div>
-              <Link to="/settings" style={{ display: 'block', textDecoration: 'none', color: 'var(--gray-700)', padding: '0.5rem 0', fontSize: '0.875rem', fontWeight: 500 }}>Edit Account Settings</Link>
-              <Link to="/applications" style={{ display: 'block', textDecoration: 'none', color: 'var(--gray-700)', padding: '0.5rem 0', fontSize: '0.875rem', fontWeight: 500 }}>My Applications</Link>
-              <div style={{ borderTop: '1px solid var(--gray-200)', marginTop: '0.5rem', paddingTop: '0.5rem' }}>
-                <a href="/" style={{ display: 'block', textDecoration: 'none', color: '#991B1B', fontSize: '0.875rem', fontWeight: 500 }}>Logout / Session Reset</a>
+            <div className="card" style={{ position: 'absolute', top: '120%', right: '0', width: '200px', zIndex: 100, boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)', border: '1px solid rgba(0, 217, 255, 0.2)' }}>
+              <div style={{ paddingBottom: '0.5rem', borderBottom: '1px solid rgba(0, 217, 255, 0.2)', fontWeight: 600, marginBottom: '0.5rem', color: 'var(--text-main)' }}>Student Profile</div>
+              <Link to="/settings" style={{ display: 'block', textDecoration: 'none', color: 'var(--text-muted)', padding: '0.5rem 0', fontSize: '0.875rem', fontWeight: 500 }}>Edit Account Settings</Link>
+              <Link to="/applications" style={{ display: 'block', textDecoration: 'none', color: 'var(--text-muted)', padding: '0.5rem 0', fontSize: '0.875rem', fontWeight: 500 }}>My Applications</Link>
+              <div style={{ borderTop: '1px solid rgba(0, 217, 255, 0.2)', marginTop: '0.5rem', paddingTop: '0.5rem' }}>
+                <a href="/" style={{ display: 'block', textDecoration: 'none', color: 'var(--secondary)', fontSize: '0.875rem', fontWeight: 500 }}>Logout / Session Reset</a>
               </div>
             </div>
           )}
@@ -137,7 +137,7 @@ function Dashboard() {
         
         <div className="card">
           <div className="card-header">
-            <div className="card-icon" style={{ color: '#D97706', backgroundColor: '#FEF3C7' }}>
+            <div className="card-icon" style={{ color: 'var(--secondary)', backgroundColor: 'rgba(255, 0, 110, 0.1)' }}>
               <Bell size={24} />
             </div>
             <div className="card-title">Pending Review</div>
@@ -147,7 +147,7 @@ function Dashboard() {
         
         <div className="card">
           <div className="card-header">
-            <div className="card-icon" style={{ color: '#059669', backgroundColor: '#D1FAE5' }}>
+            <div className="card-icon" style={{ color: 'var(--accent-green)', backgroundColor: 'rgba(57, 255, 20, 0.1)' }}>
               <Calendar size={24} />
             </div>
             <div className="card-title">Upcoming Exams</div>
@@ -324,8 +324,8 @@ function Applications() {
       <Topbar />
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2rem' }}>
         <div>
-          <h2 style={{ fontSize: '1.875rem', fontWeight: 700, color: 'var(--gray-900)' }}>My Applications</h2>
-          <p style={{ color: 'var(--gray-500)', marginTop: '0.5rem' }}>Manage and track your college applications</p>
+          <h2 style={{ fontSize: '1.875rem', fontWeight: 700, color: 'var(--text-main)' }}>My Applications</h2>
+          <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem' }}>Manage and track your college applications</p>
         </div>
         <button onClick={() => setShowForm(!showForm)} className={`btn ${showForm ? 'btn-outline' : 'btn-primary'}`} style={{ padding: '0.75rem 1.5rem' }}>
           {showForm ? 'Cancel Creation' : '+ Draft Application'}
@@ -333,38 +333,38 @@ function Applications() {
       </div>
 
       {showForm && (
-        <div className="card" style={{ marginBottom: '2rem', padding: '1.5rem', backgroundColor: '#F8FAFC' }}>
-          <h3 style={{ fontSize: '1.125rem', fontWeight: 600, marginBottom: '1rem', color: 'var(--gray-800)' }}>Draft a New Application</h3>
+        <div className="card" style={{ marginBottom: '2rem', padding: '1.5rem', backgroundColor: 'var(--surface)' }}>
+          <h3 style={{ fontSize: '1.125rem', fontWeight: 600, marginBottom: '1rem', color: 'var(--text-main)' }}>Draft a New Application</h3>
           <form onSubmit={createApplication} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', alignItems: 'end' }}>
             <div style={{ gridColumn: 'span 2' }}>
-              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--gray-700)', marginBottom: '0.5rem' }}>Student Name</label>
+              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Student Name</label>
               <input type="text" placeholder="Full Name" value={newStudentName} onChange={(e) => setNewStudentName(e.target.value)} style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid var(--gray-300)', outline: 'none' }} />
             </div>
             <div style={{ gridColumn: 'span 2' }}>
-              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--gray-700)', marginBottom: '0.5rem' }}>Email</label>
+              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Email</label>
               <input type="email" placeholder="student@example.com" value={newEmail} onChange={(e) => setNewEmail(e.target.value)} style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid var(--gray-300)', outline: 'none' }} />
             </div>
             <div>
-              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--gray-700)', marginBottom: '0.5rem' }}>Program</label>
+              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Program</label>
               <input type="text" placeholder="e.g. B.S. Computer Science" value={newProgram} onChange={(e) => setNewProgram(e.target.value)} style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid var(--gray-300)', outline: 'none' }} />
             </div>
             <div>
-              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--gray-700)', marginBottom: '0.5rem' }}>Department</label>
+              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Department</label>
               <input type="text" placeholder="e.g. Engineering" value={newDepartment} onChange={(e) => setNewDepartment(e.target.value)} style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid var(--gray-300)', outline: 'none' }} />
             </div>
             <div>
-              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--gray-700)', marginBottom: '0.5rem' }}>Academic Marks (%)</label>
+              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Academic Marks (%)</label>
               <input type="number" min="0" max="100" step="0.1" placeholder="85.5" value={newAcademicMarks} onChange={(e) => setNewAcademicMarks(e.target.value)} style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid var(--gray-300)', outline: 'none' }} />
             </div>
             <div>
-              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--gray-700)', marginBottom: '0.5rem' }}>Exam Score (%)</label>
+              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Exam Score (%)</label>
               <input type="number" min="0" max="100" step="0.1" placeholder="92.0" value={newExamScore} onChange={(e) => setNewExamScore(e.target.value)} style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid var(--gray-300)', outline: 'none' }} />
             </div>
             <div style={{ gridColumn: 'span 2', marginTop: '1rem' }}>
-              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--gray-700)', marginBottom: '0.5rem' }}>Course Preferences (Optional)</label>
+              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Course Preferences (Optional)</label>
               {newPreferences.map((pref, index) => (
                 <div key={index} style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem', alignItems: 'center' }}>
-                  <span style={{ fontSize: '0.75rem', color: 'var(--gray-500)', minWidth: '20px' }}>#{pref.priority}</span>
+                  <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', minWidth: '20px' }}>#{pref.priority}</span>
                   <input type="text" placeholder="Program" value={pref.program} onChange={(e) => {
                     const updated = [...newPreferences];
                     updated[index].program = e.target.value;
@@ -376,7 +376,7 @@ function Applications() {
                     setNewPreferences(updated);
                   }} style={{ flex: 1, padding: '0.5rem', borderRadius: '0.25rem', border: '1px solid var(--gray-300)', outline: 'none', fontSize: '0.875rem' }} />
                   {newPreferences.length > 1 && (
-                    <button type="button" onClick={() => setNewPreferences(newPreferences.filter((_, i) => i !== index))} style={{ padding: '0.25rem 0.5rem', backgroundColor: '#FCA5A5', color: '#DC2626', border: 'none', borderRadius: '0.25rem', cursor: 'pointer' }}>×</button>
+                    <button type="button" onClick={() => setNewPreferences(newPreferences.filter((_, i) => i !== index))} style={{ padding: '0.25rem 0.5rem', backgroundColor: 'rgba(255, 0, 110, 0.2)', color: 'var(--secondary)', border: 'none', borderRadius: '0.25rem', cursor: 'pointer' }}>×</button>
                   )}
                 </div>
               ))}
@@ -433,14 +433,14 @@ function Applications() {
                   )}
                 </td>
                 <td>
-                  <span className={`badge ${app.status === 'Processing' ? 'badge-primary' : app.status === 'Under Review' ? 'badge-warning' : app.status === 'Admitted' ? 'badge-success' : app.status === 'Waitlisted' ? 'badge-warning' : ''}`} style={app.status === 'Rejected' ? {backgroundColor: '#FEE2E2', color: '#991B1B'} : {}}>
+                  <span className={`badge ${app.status === 'Processing' ? 'badge-primary' : app.status === 'Under Review' ? 'badge-warning' : app.status === 'Admitted' ? 'badge-success' : app.status === 'Waitlisted' ? 'badge-warning' : ''}`} style={app.status === 'Rejected' ? {backgroundColor: 'rgba(255, 0, 110, 0.1)', color: 'var(--secondary)'} : {}}>
                     {app.status}
                   </span>
                 </td>
                 <td>
                   <div style={{ display: 'flex', gap: '0.5rem' }}>
                     <button onClick={() => manageApp(app.applicationId)} className="btn btn-outline" style={{ padding: '0.4rem 0.75rem', fontSize: '0.75rem' }}>Manage</button>
-                    <button onClick={() => deleteApplication(app._id)} className="btn btn-outline" style={{ padding: '0.4rem 0.75rem', fontSize: '0.75rem', color: '#991B1B', borderColor: '#FCA5A5' }}>Delete</button>
+                    <button onClick={() => deleteApplication(app._id)} className="btn btn-outline" style={{ padding: '0.4rem 0.75rem', fontSize: '0.75rem', color: 'var(--secondary)', borderColor: 'var(--secondary)' }}>Delete</button>
                   </div>
                 </td>
               </tr>
@@ -483,15 +483,15 @@ function EntranceExams() {
     <div>
       <Topbar />
       <div style={{ marginBottom: '2.5rem' }}>
-        <h2 style={{ fontSize: '1.875rem', fontWeight: 700, color: 'var(--gray-900)' }}>Entrance Exams</h2>
-        <p style={{ color: 'var(--gray-500)', marginTop: '0.5rem' }}>Register and view schedules for required entrance examinations</p>
+        <h2 style={{ fontSize: '1.875rem', fontWeight: 700, color: 'var(--text-main)' }}>Entrance Exams</h2>
+        <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem' }}>Register and view schedules for required entrance examinations</p>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '1.5rem' }}>
         {exams.map((exam) => (
           <div key={exam.id} className="card" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
-              <div style={{ backgroundColor: '#F3F4F6', padding: '0.75rem', borderRadius: '0.5rem', color: 'var(--primary)' }}>
+              <div style={{ backgroundColor: 'rgba(26, 30, 63, 0.5)', border: '1px solid rgba(0, 217, 255, 0.2)', padding: '0.75rem', borderRadius: '0.5rem', color: 'var(--primary)' }}>
                 <Calendar size={24} />
               </div>
               {exam.registered ? (
@@ -501,11 +501,11 @@ function EntranceExams() {
               )}
             </div>
             
-            <h3 style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--gray-900)', marginBottom: '0.5rem' }}>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--text-main)', marginBottom: '0.5rem' }}>
               {exam.title}
             </h3>
             
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', margin: '1rem 0', color: 'var(--gray-600)', flex: 1 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', margin: '1rem 0', color: 'var(--text-muted)', flex: 1 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <Calendar size={16} /> <span>{exam.date}</span>
               </div>
@@ -541,15 +541,15 @@ function MockTests() {
     <div>
       <Topbar />
       <div style={{ marginBottom: '2.5rem' }}>
-        <h2 style={{ fontSize: '1.875rem', fontWeight: 700, color: 'var(--gray-900)' }}>Mock Tests</h2>
-        <p style={{ color: 'var(--gray-500)', marginTop: '0.5rem' }}>Prepare for your entrance exams by taking realistic simulated mock tests.</p>
+        <h2 style={{ fontSize: '1.875rem', fontWeight: 700, color: 'var(--text-main)' }}>Mock Tests</h2>
+        <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem' }}>Prepare for your entrance exams by taking realistic simulated mock tests.</p>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '1.5rem' }}>
         {mockTests.map((test, index) => (
           <div key={index} className="card" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
-              <div style={{ backgroundColor: '#DBEAFE', padding: '0.75rem', borderRadius: '0.5rem', color: '#2563EB' }}>
+              <div style={{ backgroundColor: 'rgba(0, 217, 255, 0.1)', padding: '0.75rem', borderRadius: '0.5rem', color: 'var(--primary)' }}>
                 <BookOpen size={24} />
               </div>
               <span className={`badge ${test.difficulty === 'Easy' ? 'badge-success' : test.difficulty === 'Medium' ? 'badge-primary' : 'badge-warning'}`}>
@@ -557,17 +557,17 @@ function MockTests() {
               </span>
             </div>
             
-            <h3 style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--gray-900)', marginBottom: '0.5rem' }}>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--text-main)', marginBottom: '0.5rem' }}>
               {test.title}
             </h3>
             
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', margin: '1rem 0', color: 'var(--gray-600)', flex: 1 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', margin: '1rem 0', color: 'var(--text-muted)', flex: 1 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <ClipboardList size={16} /> <span>{test.subject}</span>
               </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid var(--gray-200)', paddingTop: '0.75rem', marginTop: '0.5rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid rgba(0, 217, 255, 0.2)', paddingTop: '0.75rem', marginTop: '0.5rem' }}>
                 <span style={{ fontWeight: 500 }}>{test.duration}</span>
-                <span style={{ fontWeight: 500, color: 'var(--gray-900)' }}>{test.totalMarks} Marks</span>
+                <span style={{ fontWeight: 500, color: 'var(--text-main)' }}>{test.totalMarks} Marks</span>
               </div>
             </div>
             
@@ -611,8 +611,8 @@ function Documents() {
       <Topbar />
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2.5rem' }}>
         <div>
-          <h2 style={{ fontSize: '1.875rem', fontWeight: 700, color: 'var(--gray-900)' }}>Document Center</h2>
-          <p style={{ color: 'var(--gray-500)', marginTop: '0.5rem' }}>Securely upload and verify your ID proofs and marksheets</p>
+          <h2 style={{ fontSize: '1.875rem', fontWeight: 700, color: 'var(--text-main)' }}>Document Center</h2>
+          <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem' }}>Securely upload and verify your ID proofs and marksheets</p>
         </div>
         <button onClick={() => setIsAdmin(!isAdmin)} className={`btn ${isAdmin ? 'btn-primary' : 'btn-outline'}`}>
           {isAdmin ? 'Exit Admin Mode' : 'Admin: Verify Docs'}
@@ -620,7 +620,7 @@ function Documents() {
       </div>
 
       {!isAdmin && (
-        <div className="card" style={{ marginBottom: '2rem', backgroundColor: '#F8FAFC' }}>
+        <div className="card" style={{ marginBottom: '2rem', backgroundColor: 'var(--surface)' }}>
           <h3 style={{ fontSize: '1.125rem', fontWeight: 600, marginBottom: '1rem' }}>Upload New Document</h3>
           <form onSubmit={handleUpload} style={{ display: 'flex', gap: '1rem', alignItems: 'flex-end' }}>
             <div style={{ flex: 2 }}>
@@ -629,14 +629,14 @@ function Documents() {
             </div>
             <div style={{ flex: 1 }}>
               <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, marginBottom: '0.5rem' }}>Document Type</label>
-              <select value={newType} onChange={e=>setNewType(e.target.value)} style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid var(--gray-300)', backgroundColor: 'white', outline: 'none' }}>
+              <select value={newType} onChange={e=>setNewType(e.target.value)} style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid rgba(0, 217, 255, 0.3)', backgroundColor: 'rgba(26, 30, 63, 0.8)', color: 'var(--text-main)', outline: 'none' }}>
                 <option>Marksheet</option>
                 <option>ID Proof</option>
                 <option>Certificate</option>
               </select>
             </div>
             <div style={{ flex: 1 }}>
-               <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, marginBottom: '0.5rem', color: 'transparent' }}>Upload</label>
+               <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, marginBottom: '0.5rem', color: 'var(--text-main)' }}>Upload</label>
                <input type="file" style={{ width: '100%' }} />
             </div>
             <button type="submit" className="btn btn-primary" style={{ padding: '0.75rem 1.5rem' }}><UploadCloud size={18} style={{ marginRight: '0.5rem', verticalAlign: 'middle' }}/> Upload</button>
@@ -662,15 +662,15 @@ function Documents() {
                 <td>{doc.type}</td>
                 <td>{doc.date}</td>
                 <td>
-                  <span className={`badge ${doc.status === 'Verified' ? 'badge-success' : doc.status === 'Rejected' ? '' : 'badge-warning'}`} style={doc.status==='Rejected'?{backgroundColor:'#FEE2E2',color:'#991B1B'}:{}}>
+                  <span className={`badge ${doc.status === 'Verified' ? 'badge-success' : doc.status === 'Rejected' ? '' : 'badge-warning'}`} style={doc.status==='Rejected'?{backgroundColor: 'rgba(255, 0, 110, 0.1)',color: 'var(--secondary)'}:{}}>
                     {doc.status}
                   </span>
                 </td>
                 <td>
                   {isAdmin ? (
                      <div style={{ display: 'flex', gap: '0.5rem' }}>
-                       <button onClick={() => handleStatus(doc.id, 'Verified')} className="btn btn-outline" style={{ padding: '0.35rem 0.75rem', borderColor: '#34D399', color: '#059669', fontSize: '0.75rem' }}>Verify</button>
-                       <button onClick={() => handleStatus(doc.id, 'Rejected')} className="btn btn-outline" style={{ padding: '0.35rem 0.75rem', borderColor: '#FCA5A5', color: '#DC2626', fontSize: '0.75rem' }}>Reject</button>
+                       <button onClick={() => handleStatus(doc.id, 'Verified')} className="btn btn-outline" style={{ padding: '0.35rem 0.75rem', borderColor: 'var(--accent-green)', color: 'var(--accent-green)', fontSize: '0.75rem' }}>Verify</button>
+                       <button onClick={() => handleStatus(doc.id, 'Rejected')} className="btn btn-outline" style={{ padding: '0.35rem 0.75rem', borderColor: 'var(--secondary)', color: 'var(--secondary)', fontSize: '0.75rem' }}>Reject</button>
                      </div>
                   ) : (
                      <button onClick={() => alert(`Previewing ${doc.name}...`)} className="btn btn-outline" style={{ padding: '0.35rem 1rem', fontSize: '0.85rem' }}>Preview</button>
@@ -704,36 +704,36 @@ function SettingsPage() {
     <div>
       <Topbar />
       <div style={{ marginBottom: '2.5rem' }}>
-        <h2 style={{ fontSize: '1.875rem', fontWeight: 700, color: 'var(--gray-900)' }}>Account Settings</h2>
-        <p style={{ color: 'var(--gray-500)', marginTop: '0.5rem' }}>Manage your personal details and app preferences</p>
+        <h2 style={{ fontSize: '1.875rem', fontWeight: 700, color: 'var(--text-main)' }}>Account Settings</h2>
+        <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem' }}>Manage your personal details and app preferences</p>
       </div>
       
       <div className="card">
-        <h3 style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--gray-900)', marginBottom: '1.5rem', borderBottom: '1px solid var(--gray-200)', paddingBottom: '0.5rem' }}>Personal Information</h3>
+        <h3 style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--text-main)', marginBottom: '1.5rem', borderBottom: '1px solid rgba(0, 217, 255, 0.2)', paddingBottom: '0.5rem' }}>Personal Information</h3>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
           <div>
-            <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--gray-700)', marginBottom: '0.5rem' }}>Full Name</label>
+            <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Full Name</label>
             <input type="text" value={name} onChange={e=>setName(e.target.value)} style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid var(--gray-300)', outline: 'none' }} />
           </div>
           <div>
-            <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--gray-700)', marginBottom: '0.5rem' }}>Phone Number</label>
+            <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Phone Number</label>
             <input type="text" value={phone} onChange={e=>setPhone(e.target.value)} style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid var(--gray-300)', outline: 'none' }} />
           </div>
           <div style={{ gridColumn: 'span 2' }}>
-            <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--gray-700)', marginBottom: '0.5rem' }}>Email Address</label>
+            <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Email Address</label>
             <input type="email" value={email} onChange={e=>setEmail(e.target.value)} style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid var(--gray-300)', outline: 'none' }} />
           </div>
         </div>
         
-        <h3 style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--gray-900)', marginTop: '3rem', marginBottom: '1.5rem', borderBottom: '1px solid var(--gray-200)', paddingBottom: '0.5rem' }}>Notifications</h3>
+        <h3 style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--text-main)', marginTop: '3rem', marginBottom: '1.5rem', borderBottom: '1px solid rgba(0, 217, 255, 0.2)', paddingBottom: '0.5rem' }}>Notifications</h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           <label style={{ display: 'flex', alignItems: 'center', gap: '1rem', cursor: 'pointer' }}>
             <input type="checkbox" checked={emailEnabled} onChange={e=>setEmailEnabled(e.target.checked)} style={{ width: '1.25rem', height: '1.25rem' }} />
-            <span style={{ fontWeight: 500, color: 'var(--gray-800)' }}>Email updates for Application Status</span>
+            <span style={{ fontWeight: 500, color: 'var(--text-main)' }}>Email updates for Application Status</span>
           </label>
           <label style={{ display: 'flex', alignItems: 'center', gap: '1rem', cursor: 'pointer' }}>
             <input type="checkbox" checked={smsEnabled} onChange={e=>setSmsEnabled(e.target.checked)} style={{ width: '1.25rem', height: '1.25rem' }} />
-            <span style={{ fontWeight: 500, color: 'var(--gray-800)' }}>SMS alerts for Entrance Exams</span>
+            <span style={{ fontWeight: 500, color: 'var(--text-main)' }}>SMS alerts for Entrance Exams</span>
           </label>
         </div>
         
@@ -769,8 +769,8 @@ function MeritList() {
     <div>
       <Topbar />
       <div style={{ marginBottom: '2.5rem' }}>
-        <h2 style={{ fontSize: '1.875rem', fontWeight: 700, color: 'var(--gray-900)' }}>Auto Merit List</h2>
-        <p style={{ color: 'var(--gray-500)', marginTop: '0.5rem' }}>Ranked list based on academic marks (60%) + exam score (40%)</p>
+        <h2 style={{ fontSize: '1.875rem', fontWeight: 700, color: 'var(--text-main)' }}>Auto Merit List</h2>
+        <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem' }}>Ranked list based on academic marks (60%) + exam score (40%)</p>
       </div>
 
       <div className="table-container">
@@ -841,8 +841,8 @@ function CutoffPrediction() {
     <div>
       <Topbar />
       <div style={{ marginBottom: '2.5rem' }}>
-        <h2 style={{ fontSize: '1.875rem', fontWeight: 700, color: 'var(--gray-900)' }}>Cut-off Prediction System</h2>
-        <p style={{ color: 'var(--gray-500)', marginTop: '0.5rem' }}>Predict admission cut-offs based on historical admission data</p>
+        <h2 style={{ fontSize: '1.875rem', fontWeight: 700, color: 'var(--text-main)' }}>Cut-off Prediction System</h2>
+        <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem' }}>Predict admission cut-offs based on historical admission data</p>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.5rem' }}>
@@ -855,14 +855,14 @@ function CutoffPrediction() {
                 <div style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--primary)', marginBottom: '0.5rem' }}>
                   {predictions[program].predictedCutoff}
                 </div>
-                <div style={{ color: 'var(--gray-600)', marginBottom: '1rem' }}>
+                <div style={{ color: 'var(--text-muted)', marginBottom: '1rem' }}>
                   Confidence: <span style={{ fontWeight: 600, color: predictions[program].confidence === 'High' ? '#059669' : predictions[program].confidence === 'Medium' ? '#D97706' : '#DC2626' }}>
                     {predictions[program].confidence}
                   </span>
                 </div>
               </div>
             ) : (
-              <div style={{ color: 'var(--gray-500)', marginBottom: '1rem' }}>
+              <div style={{ color: 'var(--text-muted)', marginBottom: '1rem' }}>
                 Click to predict cut-off score
               </div>
             )}
@@ -919,8 +919,8 @@ function SeatAllocation() {
       <Topbar />
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2.5rem' }}>
         <div>
-          <h2 style={{ fontSize: '1.875rem', fontWeight: 700, color: 'var(--gray-900)' }}>Seat Allocation System</h2>
-          <p style={{ color: 'var(--gray-500)', marginTop: '0.5rem' }}>Automatic seat allocation based on merit and course preferences</p>
+          <h2 style={{ fontSize: '1.875rem', fontWeight: 700, color: 'var(--text-main)' }}>Seat Allocation System</h2>
+          <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem' }}>Automatic seat allocation based on merit and course preferences</p>
         </div>
         <button onClick={allocateSeats} className="btn btn-primary" style={{ padding: '0.75rem 1.5rem' }}>
           Run Seat Allocation
@@ -932,7 +932,7 @@ function SeatAllocation() {
           <h3 style={{ fontSize: '1.125rem', fontWeight: 600, marginBottom: '1rem' }}>Recent Allocations</h3>
           <div style={{ maxHeight: '300px', overflowY: 'auto' }}>
             {allocations.map((allocation, index) => (
-              <div key={index} style={{ padding: '0.75rem', borderBottom: '1px solid var(--gray-200)', display: 'flex', justifyContent: 'space-between' }}>
+              <div key={index} style={{ padding: '0.75rem', borderBottom: '1px solid rgba(0, 217, 255, 0.2)', display: 'flex', justifyContent: 'space-between' }}>
                 <div>
                   <strong>{allocation.studentName}</strong> ({allocation.applicationId})
                 </div>
@@ -1009,8 +1009,8 @@ function PaymentHistory() {
     <div>
       <Topbar />
       <div style={{ marginBottom: '2.5rem' }}>
-        <h2 style={{ fontSize: '1.875rem', fontWeight: 700, color: 'var(--gray-900)' }}>Payment History</h2>
-        <p style={{ color: 'var(--gray-500)', marginTop: '0.5rem' }}>Track all your application fee payments</p>
+        <h2 style={{ fontSize: '1.875rem', fontWeight: 700, color: 'var(--text-main)' }}>Payment History</h2>
+        <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem' }}>Track all your application fee payments</p>
       </div>
 
       <div className="table-container">
@@ -1074,19 +1074,19 @@ function Login({ onLogin }) {
       <div className="card" style={{ maxWidth: '400px', width: '100%', padding: '2.5rem' }}>
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
           <div className="avatar" style={{ backgroundColor: 'var(--primary)', width: '48px', height: '48px', margin: '0 auto 1rem', fontSize: '1.5rem' }}>U</div>
-          <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--gray-900)' }}>Univex Portal</h2>
-          <p style={{ color: 'var(--gray-500)', marginTop: '0.5rem' }}>Sign in to your account</p>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--text-main)' }}>Univex Portal</h2>
+          <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem' }}>Sign in to your account</p>
         </div>
         
-        {error && <div style={{ backgroundColor: '#FEE2E2', color: '#991B1B', padding: '0.75rem', borderRadius: '0.5rem', marginBottom: '1rem', fontSize: '0.875rem', textAlign: 'center' }}>{error}</div>}
+        {error && <div style={{ backgroundColor: 'rgba(255, 0, 110, 0.1)', color: 'var(--secondary)', padding: '0.75rem', borderRadius: '0.5rem', marginBottom: '1rem', fontSize: '0.875rem', textAlign: 'center' }}>{error}</div>}
 
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
           <div>
-            <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--gray-700)', marginBottom: '0.5rem' }}>Email Address</label>
+            <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Email Address</label>
             <input type="email" value={email} onChange={e=>setEmail(e.target.value)} required style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid var(--gray-300)', outline: 'none' }} placeholder="student@example.com" />
           </div>
           <div>
-            <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--gray-700)', marginBottom: '0.5rem' }}>Password</label>
+            <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Password</label>
             <input type="password" value={password} onChange={e=>setPassword(e.target.value)} required style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid var(--gray-300)', outline: 'none' }} placeholder="••••••••" />
           </div>
           <button type="submit" className="btn btn-primary" style={{ width: '100%', padding: '0.75rem', marginTop: '0.5rem', fontSize: '1rem' }}>Sign In</button>
