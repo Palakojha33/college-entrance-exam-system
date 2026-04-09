@@ -18,14 +18,14 @@ console.log('Using in-memory array database (No MongoDB required!)');
 let applications = [
   { 
     _id: '1', 
-    applicationId: '#APP-2024-001', 
+    applicationId: '#ENG-2024-001', 
     studentName: 'Palak Ojha',
     email: 'palak.ojha@example.com',
-    program: 'B.S. Computer Science', 
+    program: 'B.Tech Computer Science', 
     department: 'Engineering', 
     coursePreferences: [
-      { program: 'B.S. Computer Science', department: 'Engineering', priority: 1 },
-      { program: 'B.S. Software Engineering', department: 'Engineering', priority: 2 }
+      { program: 'B.Tech Computer Science', department: 'Engineering', priority: 1 },
+      { program: 'B.Tech Information Technology', department: 'Engineering', priority: 2 }
     ],
     academicMarks: 85,
     examScore: 92,
@@ -38,13 +38,13 @@ let applications = [
   },
   { 
     _id: '2', 
-    applicationId: '#APP-2024-002', 
-    studentName: 'Palak Ojha',
-    email: 'palak.ojha@example.com',
-    program: 'B.A. Business Administration', 
-    department: 'Business', 
+    applicationId: '#ENG-2024-002', 
+    studentName: 'Rahul Sharma',
+    email: 'rahul.sharma@example.com',
+    program: 'B.Tech Mechanical Engineering', 
+    department: 'Engineering', 
     coursePreferences: [
-      { program: 'B.A. Business Administration', department: 'Business', priority: 1 }
+      { program: 'B.Tech Mechanical Engineering', department: 'Engineering', priority: 1 }
     ],
     academicMarks: 78,
     examScore: 88,
@@ -53,19 +53,19 @@ let applications = [
     paymentStatus: 'paid',
     paymentId: 'pay_test_987654321',
     status: 'Admitted', 
-    admittedProgram: 'B.A. Business Administration',
+    admittedProgram: 'B.Tech Mechanical Engineering',
     submittedDate: new Date('2024-10-20') 
   },
   { 
     _id: '3', 
-    applicationId: '#APP-2024-003', 
-    studentName: 'Palak Ojha',
-    email: 'palak.ojha@example.com',
-    program: 'B.S. Electrical Engineering', 
+    applicationId: '#ENG-2024-003', 
+    studentName: 'Priya Patel',
+    email: 'priya.patel@example.com',
+    program: 'B.Tech Electrical Engineering', 
     department: 'Engineering', 
     coursePreferences: [
-      { program: 'B.S. Electrical Engineering', department: 'Engineering', priority: 1 },
-      { program: 'B.S. Mechanical Engineering', department: 'Engineering', priority: 2 }
+      { program: 'B.Tech Electrical Engineering', department: 'Engineering', priority: 1 },
+      { program: 'B.Tech Electronics & Communication', department: 'Engineering', priority: 2 }
     ],
     academicMarks: 82,
     examScore: 85,
@@ -74,6 +74,25 @@ let applications = [
     paymentStatus: 'pending',
     status: 'Processing', 
     submittedDate: new Date('2024-10-15') 
+  },
+  { 
+    _id: '4', 
+    applicationId: '#ENG-2024-004', 
+    studentName: 'Amit Kumar',
+    email: 'amit.kumar@example.com',
+    program: 'B.Tech Civil Engineering', 
+    department: 'Engineering', 
+    coursePreferences: [
+      { program: 'B.Tech Civil Engineering', department: 'Engineering', priority: 1 }
+    ],
+    academicMarks: 80,
+    examScore: 87,
+    totalScore: 82.6,
+    applicationFee: 500,
+    paymentStatus: 'paid',
+    paymentId: 'pay_test_456789123',
+    status: 'JEE Qualified', 
+    submittedDate: new Date('2024-10-10') 
   }
 ];
 
@@ -115,16 +134,93 @@ let payments = [
 
 // Seat allocation data
 let seatAllocations = [
-  { program: 'B.S. Computer Science', department: 'Engineering', totalSeats: 50, availableSeats: 45, cutoffScore: 85 },
-  { program: 'B.S. Electrical Engineering', department: 'Engineering', totalSeats: 40, availableSeats: 38, cutoffScore: 80 },
-  { program: 'B.S. Mechanical Engineering', department: 'Engineering', totalSeats: 35, availableSeats: 35, cutoffScore: 75 },
-  { program: 'B.A. Business Administration', department: 'Business', totalSeats: 60, availableSeats: 55, cutoffScore: 78 }
+  { program: 'B.Tech Computer Science', department: 'Engineering', totalSeats: 120, availableSeats: 95, cutoffScore: 85 },
+  { program: 'B.Tech Mechanical Engineering', department: 'Engineering', totalSeats: 100, availableSeats: 88, cutoffScore: 80 },
+  { program: 'B.Tech Electrical Engineering', department: 'Engineering', totalSeats: 90, availableSeats: 82, cutoffScore: 82 },
+  { program: 'B.Tech Civil Engineering', department: 'Engineering', totalSeats: 80, availableSeats: 75, cutoffScore: 78 },
+  { program: 'B.Tech Chemical Engineering', department: 'Engineering', totalSeats: 60, availableSeats: 58, cutoffScore: 75 },
+  { program: 'B.Tech Electronics & Communication', department: 'Engineering', totalSeats: 85, availableSeats: 78, cutoffScore: 83 },
+  { program: 'B.Tech Information Technology', department: 'Engineering', totalSeats: 95, availableSeats: 87, cutoffScore: 84 },
+  { program: 'B.Tech Aerospace Engineering', department: 'Engineering', totalSeats: 50, availableSeats: 48, cutoffScore: 88 },
+  { program: 'B.Tech Biotechnology', department: 'Engineering', totalSeats: 40, availableSeats: 38, cutoffScore: 80 }
 ];
 
 // Mock routes for Auth
 const authRoutes = express.Router();
-authRoutes.post('/login', (req, res) => res.json({ token: 'mock_token', user: { name: 'Student', role: 'student' } }));
-authRoutes.post('/register', (req, res) => res.json({ message: 'User registered successfully' }));
+
+// In-memory user database
+let users = [
+  {
+    _id: '1',
+    name: 'Demo Student',
+    email: 'student@example.com',
+    password: 'password123',
+    phone: '+91 9876543210',
+    state: 'Karnataka',
+    district: 'Bangalore',
+    role: 'student',
+    createdAt: new Date('2024-01-01')
+  }
+];
+
+authRoutes.post('/login', (req, res) => {
+  const { email, password } = req.body;
+
+  const user = users.find(u => u.email === email && u.password === password);
+  if (!user) {
+    return res.status(401).json({ message: 'Invalid credentials' });
+  }
+
+  res.json({
+    token: 'mock_token_' + user._id,
+    user: {
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role
+    }
+  });
+});
+
+authRoutes.post('/register', (req, res) => {
+  const { name, email, password, phone, state, district } = req.body;
+
+  // Basic validation
+  if (!name || !email || !password || !phone || !state || !district) {
+    return res.status(400).json({ message: 'All fields are required' });
+  }
+
+  // Check if user already exists
+  const existingUser = users.find(u => u.email === email);
+  if (existingUser) {
+    return res.status(400).json({ message: 'User with this email already exists' });
+  }
+
+  // Create new user
+  const newUser = {
+    _id: (users.length + 1).toString(),
+    name,
+    email,
+    password, // In production, this should be hashed
+    phone,
+    state,
+    district,
+    role: 'student',
+    createdAt: new Date()
+  };
+
+  users.push(newUser);
+
+  res.json({
+    message: 'User registered successfully',
+    user: {
+      _id: newUser._id,
+      name: newUser.name,
+      email: newUser.email,
+      role: newUser.role
+    }
+  });
+});
 
 // Database-connected routes for Applications using JS array
 const applicationRoutes = express.Router();
@@ -139,11 +235,11 @@ applicationRoutes.post('/', (req, res) => {
   const totalScore = (req.body.academicMarks * 0.6) + (req.body.examScore * 0.4);
   const newApp = {
     _id: Date.now().toString(),
-    applicationId: `#APP-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`,
+    applicationId: `#ENG-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`,
     studentName: req.body.studentName,
     email: req.body.email,
-    program: req.body.program || 'B.S. Advanced Systems',
-    department: req.body.department || 'General',
+    program: req.body.program || 'B.Tech Computer Science',
+    department: req.body.department || 'Engineering',
     coursePreferences: req.body.coursePreferences || [],
     academicMarks: req.body.academicMarks,
     examScore: req.body.examScore,
@@ -160,6 +256,45 @@ applicationRoutes.post('/', (req, res) => {
 applicationRoutes.delete('/:id', (req, res) => {
   applications = applications.filter(app => app._id !== req.params.id);
   res.json({ message: 'Application deleted successfully' });
+});
+
+// Import application from JEE/COMEDK
+applicationRoutes.post('/import', (req, res) => {
+  const { type, applicationId, email, password } = req.body;
+  
+  // Simulate API call to external portal
+  // In real implementation, this would securely connect to JEE/COMEDK APIs
+  setTimeout(() => {
+    // Mock successful import - in reality, this would validate credentials and fetch real data
+    const mockImportedData = {
+      studentName: email.split('@')[0].replace('.', ' ').toUpperCase(),
+      email: email,
+      program: type === 'jee' ? 'B.Tech Computer Science' : 'B.Tech Information Technology',
+      department: 'Engineering',
+      academicMarks: Math.floor(70 + Math.random() * 25), // Random marks between 70-95
+      examScore: Math.floor(75 + Math.random() * 20), // Random score between 75-95
+      status: 'Imported from ' + (type === 'jee' ? 'JEE Main' : 'COMEDK'),
+      paymentStatus: Math.random() > 0.5 ? 'paid' : 'pending',
+      applicationFee: 500,
+      importedFrom: type.toUpperCase(),
+      importDate: new Date()
+    };
+    
+    const totalScore = (mockImportedData.academicMarks * 0.6) + (mockImportedData.examScore * 0.4);
+    const newApp = {
+      _id: Date.now().toString(),
+      applicationId: applicationId.startsWith('#') ? applicationId : `#${type.toUpperCase()}-${applicationId}`,
+      ...mockImportedData,
+      totalScore: totalScore,
+      submittedDate: new Date()
+    };
+    
+    applications.push(newApp);
+    res.json({ 
+      message: 'Application imported successfully', 
+      application: newApp 
+    });
+  }, 2000); // Simulate network delay
 });
 
 // New routes for smart admission features

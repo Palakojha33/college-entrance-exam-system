@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, FileText, Calendar, Settings, LogOut, Bell, Search, User, BookOpen, ClipboardList, UploadCloud, ShieldCheck, CreditCard } from 'lucide-react';
+import { LayoutDashboard, FileText, Calendar, Settings, LogOut, Bell, Search, User, BookOpen, ClipboardList, UploadCloud, ShieldCheck, CreditCard, Globe, Volume2, Type } from 'lucide-react';
 import axios from 'axios';
+import { useLanguage } from './LanguageContext';
 
 function Sidebar({ onLogout }) {
   const location = useLocation();
+  const { t } = useLanguage();
   
   return (
     <div className="sidebar">
@@ -15,39 +17,64 @@ function Sidebar({ onLogout }) {
       
       <nav style={{ flex: 1 }}>
         <Link to="/" className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}>
-          <LayoutDashboard size={20} /> Dashboard
+          <LayoutDashboard size={20} /> {t('dashboard')}
         </Link>
         <Link to="/applications" className={`nav-link ${location.pathname === '/applications' ? 'active' : ''}`}>
-          <FileText size={20} /> Applications
+          <FileText size={20} /> {t('applications')}
         </Link>
         <Link to="/merit-list" className={`nav-link ${location.pathname === '/merit-list' ? 'active' : ''}`}>
-          <ClipboardList size={20} /> Merit List
+          <ClipboardList size={20} /> {t('meritList')}
         </Link>
         <Link to="/cutoff-prediction" className={`nav-link ${location.pathname === '/cutoff-prediction' ? 'active' : ''}`}>
-          <ShieldCheck size={20} /> Cut-off Prediction
+          <ShieldCheck size={20} /> {t('cutoffPrediction')}
         </Link>
         <Link to="/seat-allocation" className={`nav-link ${location.pathname === '/seat-allocation' ? 'active' : ''}`}>
-          <BookOpen size={20} /> Seat Allocation
+          <BookOpen size={20} /> {t('seatAllocation')}
         </Link>
         <Link to="/payments" className={`nav-link ${location.pathname === '/payments' ? 'active' : ''}`}>
-          <CreditCard size={20} /> Payments
+          <CreditCard size={20} /> {t('payments')}
         </Link>
         <Link to="/exams" className={`nav-link ${location.pathname === '/exams' ? 'active' : ''}`}>
-          <Calendar size={20} /> Entrance Exams
+          <Calendar size={20} /> {t('exams')}
         </Link>
         <Link to="/mock-tests" className={`nav-link ${location.pathname === '/mock-tests' ? 'active' : ''}`}>
-          <BookOpen size={20} /> Mock Tests
+          <BookOpen size={20} /> {t('mockTests')}
         </Link>
         <Link to="/documents" className={`nav-link ${location.pathname === '/documents' ? 'active' : ''}`}>
-          <ShieldCheck size={20} /> Document Center
+          <ShieldCheck size={20} /> {t('documents')}
         </Link>
+        {/* Rural Support Links */}
+        <div style={{ margin: '1rem 0', padding: '0.5rem 0', borderTop: '1px solid rgba(0, 217, 255, 0.2)', borderBottom: '1px solid rgba(0, 217, 255, 0.2)' }}>
+          <div style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '0.5rem', textTransform: 'uppercase' }}>{t('ruralSupport')}</div>
+          <Link to="/scholarships" className={`nav-link ${location.pathname === '/scholarships' ? 'active' : ''}`}>
+            <ShieldCheck size={20} /> {t('scholarships')}
+          </Link>
+          <Link to="/helplines" className={`nav-link ${location.pathname === '/helplines' ? 'active' : ''}`}>
+            <Bell size={20} /> {t('helplines')}
+          </Link>
+          <Link to="/coaching-centers" className={`nav-link ${location.pathname === '/coaching-centers' ? 'active' : ''}`}>
+            <BookOpen size={20} /> {t('coachingCenters')}
+          </Link>
+          <Link to="/transportation" className={`nav-link ${location.pathname === '/transportation' ? 'active' : ''}`}>
+            <UploadCloud size={20} /> {t('transportation')}
+          </Link>
+          <Link to="/community-forum" className={`nav-link ${location.pathname === '/community-forum' ? 'active' : ''}`}>
+            <User size={20} /> {t('communityForum')}
+          </Link>
+          <Link to="/computer-literacy" className={`nav-link ${location.pathname === '/computer-literacy' ? 'active' : ''}`}>
+            <BookOpen size={20} /> {t('computerLiteracy')}
+          </Link>
+          <Link to="/offline-forms" className={`nav-link ${location.pathname === '/offline-forms' ? 'active' : ''}`}>
+            <UploadCloud size={20} /> {t('offlineForms')}
+          </Link>
+        </div>
         <Link to="/settings" className={`nav-link ${location.pathname === '/settings' ? 'active' : ''}`}>
-          <Settings size={20} /> Settings
+          <Settings size={20} /> {t('settings')}
         </Link>
       </nav>
       
       <div className="nav-link" onClick={onLogout} style={{ cursor: 'pointer', marginTop: 'auto' }}>
-        <LogOut size={20} /> Logout
+        <LogOut size={20} /> {t('logout')}
       </div>
     </div>
   );
@@ -56,18 +83,74 @@ function Sidebar({ onLogout }) {
 function Topbar() {
   const [showNotifications, setShowNotifications] = React.useState(false);
   const [showProfile, setShowProfile] = React.useState(false);
+  const [showLanguage, setShowLanguage] = React.useState(false);
+  const [ruralMode, setRuralMode] = React.useState(false);
+  const { language, setLanguage, t } = useLanguage();
 
   return (
     <div className="header">
-      <div className="header-title">Admissions Portal</div>
+      <div className="header-title">{t('engineeringAdmissionsPortal')}</div>
       <div className="user-profile" style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+        <div style={{ display: 'flex', gap: '1rem' }}>
+          <a 
+            href="https://jeemain.nta.nic.in/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="btn btn-outline" 
+            style={{ textDecoration: 'none', fontSize: '0.875rem', padding: '0.5rem 1rem' }}
+          >
+            {t('applyJee')}
+          </a>
+          <a 
+            href="https://www.comedk.org/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="btn btn-outline" 
+            style={{ textDecoration: 'none', fontSize: '0.875rem', padding: '0.5rem 1rem' }}
+          >
+            {t('applyComedk')}
+          </a>
+        </div>
+        
         <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
           <Search size={20} color="var(--gray-400)" style={{ position: 'absolute', left: '10px' }} />
           <input 
             type="text" 
-            placeholder="Search..." 
+            placeholder={t('searchPrograms')} 
             style={{ padding: '0.6rem 1rem 0.6rem 2.5rem', borderRadius: 'var(--radius-md)', border: '1px solid rgba(0, 217, 255, 0.2)', outline: 'none' }} 
           />
+        </div>
+
+        {/* Rural Features */}
+        <div style={{ position: 'relative' }}>
+          <button 
+            className="btn btn-outline" 
+            onClick={() => setRuralMode(!ruralMode)}
+            style={{ padding: '0.5rem', fontSize: '0.75rem' }}
+          >
+            {ruralMode ? 'Normal Mode' : t('ruralFriendlyMode')}
+          </button>
+        </div>
+
+        {/* Language Selector */}
+        <div style={{ position: 'relative' }}>
+          <Globe 
+            size={24} 
+            color="var(--text-muted)" 
+            style={{ cursor: 'pointer' }} 
+            onClick={() => { setShowLanguage(!showLanguage); setShowNotifications(false); setShowProfile(false); }} 
+          />
+          {showLanguage && (
+            <div className="card" style={{ position: 'absolute', top: '150%', right: '-50px', width: '150px', zIndex: 100, boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)', border: '1px solid rgba(0, 217, 255, 0.2)' }}>
+              <div style={{ paddingBottom: '0.5rem', borderBottom: '1px solid rgba(0, 217, 255, 0.2)', fontWeight: 600, marginBottom: '0.5rem', color: 'var(--text-main)' }}>{t('selectLanguage')}</div>
+              <div style={{ fontSize: '0.875rem', padding: '0.5rem 0', color: 'var(--text-muted)', cursor: 'pointer' }} onClick={() => { setLanguage('en'); setShowLanguage(false); }}>
+                {t('english')}
+              </div>
+              <div style={{ fontSize: '0.875rem', padding: '0.5rem 0', color: 'var(--text-muted)', cursor: 'pointer' }} onClick={() => { setLanguage('hi'); setShowLanguage(false); }}>
+                {t('hindi')}
+              </div>
+            </div>
+          )}
         </div>
         
         <div style={{ position: 'relative' }}>
@@ -75,19 +158,19 @@ function Topbar() {
             size={24} 
             color="var(--text-muted)" 
             style={{ cursor: 'pointer' }} 
-            onClick={() => { setShowNotifications(!showNotifications); setShowProfile(false); }} 
+            onClick={() => { setShowNotifications(!showNotifications); setShowProfile(false); setShowLanguage(false); }} 
           />
           {showNotifications && (
             <div className="card" style={{ position: 'absolute', top: '150%', right: '-50px', width: '320px', zIndex: 100, boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)', border: '1px solid rgba(0, 217, 255, 0.2)' }}>
-              <div style={{ paddingBottom: '0.5rem', borderBottom: '1px solid rgba(0, 217, 255, 0.2)', fontWeight: 600, marginBottom: '0.5rem', color: 'var(--text-main)' }}>Notifications</div>
+              <div style={{ paddingBottom: '0.5rem', borderBottom: '1px solid rgba(0, 217, 255, 0.2)', fontWeight: 600, marginBottom: '0.5rem', color: 'var(--text-main)' }}>{t('notifications')}</div>
               <div style={{ fontSize: '0.875rem', padding: '0.5rem 0', color: 'var(--text-muted)', borderBottom: '1px solid rgba(0, 217, 255, 0.1)' }}>
-                <strong>JEE Main</strong> registration is closing soon!
+                <strong>JEE Main</strong> {t('jeeRegistrationClosing')}
               </div>
               <div style={{ fontSize: '0.875rem', padding: '0.5rem 0', color: 'var(--text-muted)', borderBottom: '1px solid rgba(0, 217, 255, 0.1)' }}>
-                Your engineering application is <strong style={{ color: 'var(--secondary)' }}>Under Review</strong>.
+                {t('applicationUnderReview')}
               </div>
               <div style={{ fontSize: '0.875rem', padding: '0.5rem 0', color: 'var(--text-muted)' }}>
-                System maintenance scheduled for tomorrow.
+                {t('systemMaintenance')}
               </div>
             </div>
           )}
@@ -97,17 +180,17 @@ function Topbar() {
           <div 
             className="avatar" 
             style={{ cursor: 'pointer' }} 
-            onClick={() => { setShowProfile(!showProfile); setShowNotifications(false); }}
+            onClick={() => { setShowProfile(!showProfile); setShowNotifications(false); setShowLanguage(false); }}
           >
             <User size={20} />
           </div>
           {showProfile && (
             <div className="card" style={{ position: 'absolute', top: '120%', right: '0', width: '200px', zIndex: 100, boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)', border: '1px solid rgba(0, 217, 255, 0.2)' }}>
-              <div style={{ paddingBottom: '0.5rem', borderBottom: '1px solid rgba(0, 217, 255, 0.2)', fontWeight: 600, marginBottom: '0.5rem', color: 'var(--text-main)' }}>Student Profile</div>
-              <Link to="/settings" style={{ display: 'block', textDecoration: 'none', color: 'var(--text-muted)', padding: '0.5rem 0', fontSize: '0.875rem', fontWeight: 500 }}>Edit Account Settings</Link>
-              <Link to="/applications" style={{ display: 'block', textDecoration: 'none', color: 'var(--text-muted)', padding: '0.5rem 0', fontSize: '0.875rem', fontWeight: 500 }}>My Applications</Link>
+              <div style={{ paddingBottom: '0.5rem', borderBottom: '1px solid rgba(0, 217, 255, 0.2)', fontWeight: 600, marginBottom: '0.5rem', color: 'var(--text-main)' }}>{t('studentProfile')}</div>
+              <Link to="/settings" style={{ display: 'block', textDecoration: 'none', color: 'var(--text-muted)', padding: '0.5rem 0', fontSize: '0.875rem', fontWeight: 500 }}>{t('editSettings')}</Link>
+              <Link to="/applications" style={{ display: 'block', textDecoration: 'none', color: 'var(--text-muted)', padding: '0.5rem 0', fontSize: '0.875rem', fontWeight: 500 }}>{t('myApplications')}</Link>
               <div style={{ borderTop: '1px solid rgba(0, 217, 255, 0.2)', marginTop: '0.5rem', paddingTop: '0.5rem' }}>
-                <a href="/" style={{ display: 'block', textDecoration: 'none', color: 'var(--secondary)', fontSize: '0.875rem', fontWeight: 500 }}>Logout / Session Reset</a>
+                <a href="/" style={{ display: 'block', textDecoration: 'none', color: 'var(--secondary)', fontSize: '0.875rem', fontWeight: 500 }}>{t('logoutSession')}</a>
               </div>
             </div>
           )}
@@ -118,11 +201,37 @@ function Topbar() {
 }
 
 function Dashboard() {
+  const { t } = useLanguage();
   const [data, setData] = useState({ applications: 12, pending: 4, exams: 2 });
 
   return (
     <div>
       <Topbar />
+      
+      <div style={{ textAlign: 'center', marginBottom: '2rem', padding: '2rem', background: 'linear-gradient(135deg, var(--primary), var(--secondary))', borderRadius: 'var(--radius-lg)', color: 'white' }}>
+        <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>{t('engineeringAdmissionsPortal')}</h1>
+        <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem' }}>{t('gatewayToPrograms')}</p>
+        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <a 
+            href="https://jeemain.nta.nic.in/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="btn" 
+            style={{ backgroundColor: 'white', color: 'var(--primary)', textDecoration: 'none', padding: '0.75rem 1.5rem', borderRadius: 'var(--radius-md)', fontWeight: '600' }}
+          >
+            {t('applyJee')}
+          </a>
+          <a 
+            href="https://www.comedk.org/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="btn" 
+            style={{ backgroundColor: 'white', color: 'var(--secondary)', textDecoration: 'none', padding: '0.75rem 1.5rem', borderRadius: 'var(--radius-md)', fontWeight: '600' }}
+          >
+            {t('applyComedk')}
+          </a>
+        </div>
+      </div>
       
       <div className="card-grid">
         <div className="card">
@@ -130,7 +239,7 @@ function Dashboard() {
             <div className="card-icon">
               <FileText size={24} />
             </div>
-            <div className="card-title">Total Applications</div>
+            <div className="card-title">{t('engineeringApplications')}</div>
           </div>
           <div className="card-value">{data.applications}</div>
         </div>
@@ -140,7 +249,7 @@ function Dashboard() {
             <div className="card-icon" style={{ color: 'var(--secondary)', backgroundColor: 'rgba(255, 0, 110, 0.1)' }}>
               <Bell size={24} />
             </div>
-            <div className="card-title">Pending Review</div>
+            <div className="card-title">{t('pending')}</div>
           </div>
           <div className="card-value">{data.pending}</div>
         </div>
@@ -150,15 +259,15 @@ function Dashboard() {
             <div className="card-icon" style={{ color: 'var(--accent-green)', backgroundColor: 'rgba(57, 255, 20, 0.1)' }}>
               <Calendar size={24} />
             </div>
-            <div className="card-title">Upcoming Exams</div>
+            <div className="card-title">{t('upcomingExams')}</div>
           </div>
           <div className="card-value">{data.exams}</div>
         </div>
       </div>
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '2rem' }}>
-        <h2 style={{ fontSize: '1.25rem', fontWeight: 600 }}>Recent Applications</h2>
-        <Link to="/applications" className="btn btn-primary" style={{ textDecoration: 'none' }}>Start New Application</Link>
+        <h2 style={{ fontSize: '1.25rem', fontWeight: 600 }}>{t('recentApplications')}</h2>
+        <Link to="/applications" className="btn btn-primary" style={{ textDecoration: 'none' }}>{t('startApplication')}</Link>
       </div>
 
       <div className="table-container">
@@ -166,7 +275,7 @@ function Dashboard() {
           <thead>
             <tr>
               <th>ID</th>
-              <th>Program</th>
+              <th>{t('program')}</th>
               <th>Date Applied</th>
               <th>Status</th>
               <th>Action</th>
@@ -174,25 +283,32 @@ function Dashboard() {
           </thead>
           <tbody>
             <tr>
-              <td>#APP-2024-001</td>
-              <td>B.S. Computer Science</td>
+              <td>#ENG-2024-001</td>
+              <td>B.Tech Computer Science</td>
               <td>Oct 24, 2024</td>
-              <td><span className="badge badge-warning">Under Review</span></td>
-              <td><button onClick={() => alert('Viewing details for APP-2024-001')} className="btn btn-outline" style={{ padding: '0.25rem 0.75rem' }}>View</button></td>
+              <td><span className="badge badge-warning">{t('underReview')}</span></td>
+              <td><button onClick={() => alert('Viewing details for ENG-2024-001')} className="btn btn-outline" style={{ padding: '0.25rem 0.75rem' }}>{t('view')}</button></td>
             </tr>
             <tr>
-              <td>#APP-2024-002</td>
-              <td>B.A. Business Admin</td>
+              <td>#ENG-2024-002</td>
+              <td>B.Tech Mechanical Engineering</td>
               <td>Oct 20, 2024</td>
-              <td><span className="badge badge-success">Admitted</span></td>
-              <td><button onClick={() => alert('Viewing details for APP-2024-002')} className="btn btn-outline" style={{ padding: '0.25rem 0.75rem' }}>View</button></td>
+              <td><span className="badge badge-success">{t('admitted')}</span></td>
+              <td><button onClick={() => alert('Viewing details for ENG-2024-002')} className="btn btn-outline" style={{ padding: '0.25rem 0.75rem' }}>{t('view')}</button></td>
             </tr>
             <tr>
-              <td>#APP-2024-003</td>
-              <td>B.S. Engineering</td>
+              <td>#ENG-2024-003</td>
+              <td>B.Tech Electrical Engineering</td>
               <td>Oct 15, 2024</td>
-              <td><span className="badge badge-primary">Processing</span></td>
-              <td><button onClick={() => alert('Viewing details for APP-2024-003')} className="btn btn-outline" style={{ padding: '0.25rem 0.75rem' }}>View</button></td>
+              <td><span className="badge badge-primary">{t('processing')}</span></td>
+              <td><button onClick={() => alert('Viewing details for ENG-2024-003')} className="btn btn-outline" style={{ padding: '0.25rem 0.75rem' }}>{t('view')}</button></td>
+            </tr>
+            <tr>
+              <td>#ENG-2024-004</td>
+              <td>B.Tech Civil Engineering</td>
+              <td>Oct 10, 2024</td>
+              <td><span className="badge badge-info">{t('jeeQualified')}</span></td>
+              <td><button onClick={() => alert('Viewing details for ENG-2024-004')} className="btn btn-outline" style={{ padding: '0.25rem 0.75rem' }}>{t('view')}</button></td>
             </tr>
           </tbody>
         </table>
@@ -216,10 +332,17 @@ function Applications() {
   const [newPreferences, setNewPreferences] = React.useState([
     { program: '', department: '', priority: 1 }
   ]);
+  // Import application states
+  const [showImport, setShowImport] = React.useState(false);
+  const [importType, setImportType] = React.useState('jee');
+  const [importApplicationId, setImportApplicationId] = React.useState('');
+  const [importEmail, setImportEmail] = React.useState('');
+  const [importPassword, setImportPassword] = React.useState('');
+  const [importing, setImporting] = React.useState(false);
 
   const fetchApplications = async () => {
     try {
-      const response = await axios.get('http://localhost:5001/api/applications');
+      const response = await axios.get('/api/applications');
       setApplications(response.data);
       setLoading(false);
     } catch (err) {
@@ -240,7 +363,7 @@ function Applications() {
       return alert('Please fill all required fields');
     }
     try {
-      await axios.post('http://localhost:5001/api/applications', {
+      await axios.post('/api/applications', {
         studentName: newStudentName,
         email: newEmail,
         program: newProgram,
@@ -267,7 +390,7 @@ function Applications() {
   const deleteApplication = async (id) => {
     if (!window.confirm('Are you certain you want to permanently delete this application?')) return;
     try {
-      await axios.delete(`http://localhost:5001/api/applications/${id}`);
+      await axios.delete(`/api/applications/${id}`);
       fetchApplications();
     } catch (err) {
       alert("Failed to delete application.");
@@ -281,7 +404,7 @@ function Applications() {
   const initiatePayment = async (application) => {
     try {
       // Create Razorpay order
-      const orderResponse = await axios.post('http://localhost:5001/api/payments/create-order', {
+      const orderResponse = await axios.post('/api/payments/create-order', {
         applicationId: application.applicationId,
         amount: application.applicationFee,
         studentName: application.studentName,
@@ -299,7 +422,7 @@ function Applications() {
         };
         
         // Simulate the handler function
-        axios.post('http://localhost:5001/api/payments/verify-payment', mockResponse)
+        axios.post('/api/payments/verify-payment', mockResponse)
           .then(() => {
             alert('Payment successful! Your application is now active.');
             fetchApplications(); // Refresh the list
@@ -319,22 +442,58 @@ function Applications() {
     }
   };
 
+  const importApplication = async (e) => {
+    e.preventDefault();
+    if (!importApplicationId || !importEmail) {
+      return alert('Please fill all required fields');
+    }
+    
+    setImporting(true);
+    
+    try {
+      // Simulate API call to import application
+      const response = await axios.post('/api/applications/import', {
+        type: importType,
+        applicationId: importApplicationId,
+        email: importEmail,
+        password: importPassword // In real implementation, this would be handled securely
+      });
+      
+      alert(`Application imported successfully! Application ID: ${response.data.applicationId}`);
+      setShowImport(false);
+      setImportApplicationId('');
+      setImportEmail('');
+      setImportPassword('');
+      fetchApplications();
+    } catch (err) {
+      console.error('Failed to import application', err);
+      alert('Failed to import application. Please check your credentials and try again.');
+    } finally {
+      setImporting(false);
+    }
+  };
+
   return (
     <div>
       <Topbar />
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2rem' }}>
         <div>
-          <h2 style={{ fontSize: '1.875rem', fontWeight: 700, color: 'var(--text-main)' }}>My Applications</h2>
-          <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem' }}>Manage and track your college applications</p>
+          <h2 style={{ fontSize: '1.875rem', fontWeight: 700, color: 'var(--text-main)' }}>Engineering Applications</h2>
+          <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem' }}>Apply for engineering programs through JEE Main and COMEDK</p>
         </div>
-        <button onClick={() => setShowForm(!showForm)} className={`btn ${showForm ? 'btn-outline' : 'btn-primary'}`} style={{ padding: '0.75rem 1.5rem' }}>
-          {showForm ? 'Cancel Creation' : '+ Draft Application'}
-        </button>
+        <div style={{ display: 'flex', gap: '1rem' }}>
+          <button onClick={() => setShowImport(!showImport)} className="btn btn-secondary" style={{ padding: '0.75rem 1.5rem' }}>
+            📥 Import from JEE/COMEDK
+          </button>
+          <button onClick={() => setShowForm(!showForm)} className={`btn ${showForm ? 'btn-outline' : 'btn-primary'}`} style={{ padding: '0.75rem 1.5rem' }}>
+            {showForm ? 'Cancel Creation' : '+ Draft Engineering Application'}
+          </button>
+        </div>
       </div>
 
       {showForm && (
         <div className="card" style={{ marginBottom: '2rem', padding: '1.5rem', backgroundColor: 'var(--surface)' }}>
-          <h3 style={{ fontSize: '1.125rem', fontWeight: 600, marginBottom: '1rem', color: 'var(--text-main)' }}>Draft a New Application</h3>
+          <h3 style={{ fontSize: '1.125rem', fontWeight: 600, marginBottom: '1rem', color: 'var(--text-main)' }}>Draft a New Engineering Application</h3>
           <form onSubmit={createApplication} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', alignItems: 'end' }}>
             <div style={{ gridColumn: 'span 2' }}>
               <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Student Name</label>
@@ -345,19 +504,30 @@ function Applications() {
               <input type="email" placeholder="student@example.com" value={newEmail} onChange={(e) => setNewEmail(e.target.value)} style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid var(--gray-300)', outline: 'none' }} />
             </div>
             <div>
-              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Program</label>
-              <input type="text" placeholder="e.g. B.S. Computer Science" value={newProgram} onChange={(e) => setNewProgram(e.target.value)} style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid var(--gray-300)', outline: 'none' }} />
+              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Engineering Program</label>
+              <select value={newProgram} onChange={(e) => setNewProgram(e.target.value)} style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid var(--gray-300)', outline: 'none' }}>
+                <option value="">Select Engineering Program</option>
+                <option value="B.Tech Computer Science">B.Tech Computer Science</option>
+                <option value="B.Tech Mechanical Engineering">B.Tech Mechanical Engineering</option>
+                <option value="B.Tech Electrical Engineering">B.Tech Electrical Engineering</option>
+                <option value="B.Tech Civil Engineering">B.Tech Civil Engineering</option>
+                <option value="B.Tech Chemical Engineering">B.Tech Chemical Engineering</option>
+                <option value="B.Tech Electronics & Communication">B.Tech Electronics & Communication</option>
+                <option value="B.Tech Information Technology">B.Tech Information Technology</option>
+                <option value="B.Tech Aerospace Engineering">B.Tech Aerospace Engineering</option>
+                <option value="B.Tech Biotechnology">B.Tech Biotechnology</option>
+              </select>
             </div>
             <div>
               <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Department</label>
-              <input type="text" placeholder="e.g. Engineering" value={newDepartment} onChange={(e) => setNewDepartment(e.target.value)} style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid var(--gray-300)', outline: 'none' }} />
+              <input type="text" value="Engineering" readOnly style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid var(--gray-300)', outline: 'none', backgroundColor: 'var(--gray-100)' }} />
             </div>
             <div>
-              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Academic Marks (%)</label>
+              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Class 12 Marks (%)</label>
               <input type="number" min="0" max="100" step="0.1" placeholder="85.5" value={newAcademicMarks} onChange={(e) => setNewAcademicMarks(e.target.value)} style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid var(--gray-300)', outline: 'none' }} />
             </div>
             <div>
-              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Exam Score (%)</label>
+              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>JEE/COMEDK Score (%)</label>
               <input type="number" min="0" max="100" step="0.1" placeholder="92.0" value={newExamScore} onChange={(e) => setNewExamScore(e.target.value)} style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid var(--gray-300)', outline: 'none' }} />
             </div>
             <div style={{ gridColumn: 'span 2', marginTop: '1rem' }}>
@@ -390,35 +560,106 @@ function Applications() {
         </div>
       )}
 
-      <div className="table-container">
-        <table>
+      {showImport && (
+        <div className="card" style={{ marginBottom: '2rem', padding: '1.5rem', backgroundColor: 'var(--surface)' }}>
+          <h3 style={{ fontSize: '1.125rem', fontWeight: 600, marginBottom: '1rem', color: 'var(--text-main)' }}>Import Application from JEE/COMEDK</h3>
+          <p style={{ fontSize: '0.875rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>
+            Automatically sync your application data from official JEE Main or COMEDK portals.
+          </p>
+          
+          <form onSubmit={importApplication} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', alignItems: 'end' }}>
+            <div>
+              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Application Type</label>
+              <select value={importType} onChange={(e) => setImportType(e.target.value)} style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid var(--gray-300)', outline: 'none' }}>
+                <option value="jee">JEE Main</option>
+                <option value="comedk">COMEDK</option>
+              </select>
+            </div>
+            <div>
+              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Application ID</label>
+              <input 
+                type="text" 
+                placeholder="Enter your application ID" 
+                value={importApplicationId} 
+                onChange={(e) => setImportApplicationId(e.target.value)} 
+                style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid var(--gray-300)', outline: 'none' }} 
+              />
+            </div>
+            <div>
+              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Registered Email</label>
+              <input 
+                type="email" 
+                placeholder="email@jee.com" 
+                value={importEmail} 
+                onChange={(e) => setImportEmail(e.target.value)} 
+                style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid var(--gray-300)', outline: 'none' }} 
+              />
+            </div>
+            <div>
+              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Password</label>
+              <input 
+                type="password" 
+                placeholder="Your portal password" 
+                value={importPassword} 
+                onChange={(e) => setImportPassword(e.target.value)} 
+                style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid var(--gray-300)', outline: 'none' }} 
+              />
+            </div>
+            <div style={{ gridColumn: 'span 2', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '1rem' }}>
+              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                🔒 Your credentials are encrypted and secure
+              </div>
+              <div style={{ display: 'flex', gap: '1rem' }}>
+                <button type="button" onClick={() => setShowImport(false)} className="btn btn-outline">Cancel</button>
+                <button type="submit" className="btn btn-primary" disabled={importing}>
+                  {importing ? '🔄 Importing...' : '📥 Import Application'}
+                </button>
+              </div>
+            </div>
+          </form>
+          
+          <div style={{ marginTop: '1rem', padding: '1rem', backgroundColor: 'var(--gray-50)', borderRadius: '0.5rem', border: '1px solid var(--gray-200)' }}>
+            <h4 style={{ fontSize: '0.875rem', fontWeight: 600, marginBottom: '0.5rem', color: 'var(--text-main)' }}>What gets imported?</h4>
+            <ul style={{ fontSize: '0.75rem', color: 'var(--text-muted)', margin: 0, paddingLeft: '1rem' }}>
+              <li>Application details and status</li>
+              <li>Personal information and documents</li>
+              <li>Exam scores and rankings</li>
+              <li>Payment and fee details</li>
+              <li>Seat allocation information</li>
+            </ul>
+          </div>
+        </div>
+      )}
+
+      <div className="table-container" style={{ overflowX: 'auto', marginTop: '2rem' }}>
+        <table style={{ minWidth: '1200px', width: '100%' }}>
           <thead>
             <tr>
-              <th>Application ID</th>
-              <th>Student Name</th>
-              <th>Program</th>
-              <th>Academic Marks</th>
-              <th>Exam Score</th>
-              <th>Total Score</th>
-              <th>Payment Status</th>
-              <th>Status</th>
-              <th>Actions</th>
+              <th style={{ minWidth: '120px' }}>Application ID</th>
+              <th style={{ minWidth: '150px' }}>Student Name</th>
+              <th style={{ minWidth: '200px' }}>Program</th>
+              <th style={{ minWidth: '120px' }}>Academic Marks</th>
+              <th style={{ minWidth: '120px' }}>Exam Score</th>
+              <th style={{ minWidth: '100px' }}>Total Score</th>
+              <th style={{ minWidth: '120px' }}>Payment Status</th>
+              <th style={{ minWidth: '120px' }}>Status</th>
+              <th style={{ minWidth: '180px' }}>Actions</th>
             </tr>
           </thead>
           <tbody>
             {loading ? (
-              <tr><td colSpan="9" style={{textAlign: 'center'}}>Loading data from Database...</td></tr>
+              <tr><td colSpan="9" style={{textAlign: 'center', padding: '2rem', fontSize: '1.1rem', color: 'var(--text-muted)'}}>Loading data from Database...</td></tr>
             ) : applications.length === 0 ? (
-              <tr><td colSpan="9" style={{textAlign: 'center'}}>No applications found. Click "+ Draft Application" to create one.</td></tr>
+              <tr><td colSpan="9" style={{textAlign: 'center', padding: '2rem', fontSize: '1.1rem', color: 'var(--text-muted)'}}>No applications found. Click "+ Draft Application" to create one.</td></tr>
             ) : applications.map(app => (
               <tr key={app._id}>
-                <td style={{ fontWeight: 500 }}>{app.applicationId}</td>
-                <td>{app.studentName || 'N/A'}</td>
-                <td>{app.program}</td>
-                <td>{app.academicMarks ? `${app.academicMarks}%` : 'N/A'}</td>
-                <td>{app.examScore ? `${app.examScore}%` : 'N/A'}</td>
-                <td style={{ fontWeight: 600 }}>{app.totalScore ? app.totalScore.toFixed(2) : 'N/A'}</td>
-                <td>
+                <td style={{ fontWeight: 500, padding: '1rem' }}>{app.applicationId}</td>
+                <td style={{ padding: '1rem' }}>{app.studentName || 'N/A'}</td>
+                <td style={{ padding: '1rem' }}>{app.program}</td>
+                <td style={{ padding: '1rem' }}>{app.academicMarks ? `${app.academicMarks}%` : 'N/A'}</td>
+                <td style={{ padding: '1rem' }}>{app.examScore ? `${app.examScore}%` : 'N/A'}</td>
+                <td style={{ fontWeight: 600, padding: '1rem' }}>{app.totalScore ? app.totalScore.toFixed(2) : 'N/A'}</td>
+                <td style={{ padding: '1rem' }}>
                   <span className={`badge ${app.paymentStatus === 'paid' ? 'badge-success' : app.paymentStatus === 'failed' ? 'badge-danger' : 'badge-warning'}`}>
                     {app.paymentStatus === 'paid' ? 'Paid' : app.paymentStatus === 'failed' ? 'Failed' : 'Pending'}
                   </span>
@@ -432,15 +673,15 @@ function Applications() {
                     </button>
                   )}
                 </td>
-                <td>
+                <td style={{ padding: '1rem' }}>
                   <span className={`badge ${app.status === 'Processing' ? 'badge-primary' : app.status === 'Under Review' ? 'badge-warning' : app.status === 'Admitted' ? 'badge-success' : app.status === 'Waitlisted' ? 'badge-warning' : ''}`} style={app.status === 'Rejected' ? {backgroundColor: 'rgba(255, 0, 110, 0.1)', color: 'var(--secondary)'} : {}}>
                     {app.status}
                   </span>
                 </td>
-                <td>
-                  <div style={{ display: 'flex', gap: '0.5rem' }}>
-                    <button onClick={() => manageApp(app.applicationId)} className="btn btn-outline" style={{ padding: '0.4rem 0.75rem', fontSize: '0.75rem' }}>Manage</button>
-                    <button onClick={() => deleteApplication(app._id)} className="btn btn-outline" style={{ padding: '0.4rem 0.75rem', fontSize: '0.75rem', color: 'var(--secondary)', borderColor: 'var(--secondary)' }}>Delete</button>
+                <td style={{ padding: '1rem' }}>
+                  <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                    <button onClick={() => manageApp(app.applicationId)} className="btn btn-outline" style={{ padding: '0.4rem 0.75rem', fontSize: '0.75rem', whiteSpace: 'nowrap' }}>Manage</button>
+                    <button onClick={() => deleteApplication(app._id)} className="btn btn-outline" style={{ padding: '0.4rem 0.75rem', fontSize: '0.75rem', color: 'var(--secondary)', borderColor: 'var(--secondary)', whiteSpace: 'nowrap' }}>Delete</button>
                   </div>
                 </td>
               </tr>
@@ -752,7 +993,7 @@ function MeritList() {
 
   const fetchMeritList = async () => {
     try {
-      const response = await axios.get('http://localhost:5001/api/applications/merit-list');
+      const response = await axios.get('/api/applications/merit-list');
       setMeritList(response.data);
       setLoading(false);
     } catch (err) {
@@ -829,7 +1070,7 @@ function CutoffPrediction() {
   const fetchPrediction = async (program) => {
     setLoading(true);
     try {
-      const response = await axios.get(`http://localhost:5001/api/applications/cutoff-prediction/${encodeURIComponent(program)}`);
+      const response = await axios.get(`/api/applications/cutoff-prediction/${encodeURIComponent(program)}`);
       setPredictions(prev => ({ ...prev, [program]: response.data }));
     } catch (err) {
       console.error('Failed to fetch prediction', err);
@@ -889,7 +1130,7 @@ function SeatAllocation() {
 
   const fetchSeats = async () => {
     try {
-      const response = await axios.get('http://localhost:5001/api/seats');
+      const response = await axios.get('/api/seats');
       setSeats(response.data);
       setLoading(false);
     } catch (err) {
@@ -900,7 +1141,7 @@ function SeatAllocation() {
 
   const allocateSeats = async () => {
     try {
-      const response = await axios.post('http://localhost:5001/api/seats/allocate-seats');
+      const response = await axios.post('/api/seats/allocate-seats');
       setAllocations(response.data.allocations);
       setSeats(response.data.remainingSeats);
       alert('Seat allocation completed successfully!');
@@ -992,7 +1233,7 @@ function PaymentHistory() {
   const fetchPaymentHistory = async () => {
     try {
       // Using a mock student ID for demo
-      const response = await axios.get('http://localhost:5001/api/payments/history/1');
+      const response = await axios.get('/api/payments/history/1');
       setPayments(response.data);
       setLoading(false);
     } catch (err) {
@@ -1060,7 +1301,7 @@ function Login({ onLogin }) {
     e.preventDefault();
     try {
       // Points to the mock authentication route in backend/server.js
-      const res = await axios.post('http://localhost:5001/api/auth/login', { email, password });
+      const res = await axios.post('/api/auth/login', { email, password });
       if (res.data.token) {
         onLogin(res.data.user);
       }
@@ -1077,7 +1318,7 @@ function Login({ onLogin }) {
           <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--text-main)' }}>Univex Portal</h2>
           <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem' }}>Sign in to your account</p>
         </div>
-        
+
         {error && <div style={{ backgroundColor: 'rgba(255, 0, 110, 0.1)', color: 'var(--secondary)', padding: '0.75rem', borderRadius: '0.5rem', marginBottom: '1rem', fontSize: '0.875rem', textAlign: 'center' }}>{error}</div>}
 
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
@@ -1091,6 +1332,767 @@ function Login({ onLogin }) {
           </div>
           <button type="submit" className="btn btn-primary" style={{ width: '100%', padding: '0.75rem', marginTop: '0.5rem', fontSize: '1rem' }}>Sign In</button>
         </form>
+
+        <div style={{ textAlign: 'center', marginTop: '1.5rem', paddingTop: '1.5rem', borderTop: '1px solid var(--gray-200)' }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>
+            Don't have an account?{' '}
+            <Link to="/register" style={{ color: 'var(--primary)', textDecoration: 'none', fontWeight: 500 }}>
+              Create one here
+            </Link>
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Register({ onRegister }) {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    phone: '',
+    state: '',
+    district: ''
+  });
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    setSuccess('');
+
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match!');
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      setError('Password must be at least 6 characters long!');
+      return;
+    }
+
+    try {
+      const res = await axios.post('/api/auth/register', {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+        phone: formData.phone,
+        state: formData.state,
+        district: formData.district
+      });
+
+      setSuccess('Registration successful! Please sign in.');
+      setTimeout(() => {
+        window.location.href = '/signin';
+      }, 2000);
+    } catch(err) {
+      setError(err.response?.data?.message || 'Registration failed! Please try again.');
+    }
+  };
+
+  return (
+    <div style={{ display: 'flex', height: '100vh', width: '100vw', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--gray-50)' }}>
+      <div className="card" style={{ maxWidth: '450px', width: '100%', padding: '2.5rem' }}>
+        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+          <div className="avatar" style={{ backgroundColor: 'var(--primary)', width: '48px', height: '48px', margin: '0 auto 1rem', fontSize: '1.5rem' }}>U</div>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--text-main)' }}>Join Univex Portal</h2>
+          <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem' }}>Create your account to get started</p>
+        </div>
+
+        {error && <div style={{ backgroundColor: 'rgba(255, 0, 110, 0.1)', color: 'var(--secondary)', padding: '0.75rem', borderRadius: '0.5rem', marginBottom: '1rem', fontSize: '0.875rem', textAlign: 'center' }}>{error}</div>}
+        {success && <div style={{ backgroundColor: 'rgba(0, 217, 255, 0.1)', color: 'var(--primary)', padding: '0.75rem', borderRadius: '0.5rem', marginBottom: '1rem', fontSize: '0.875rem', textAlign: 'center' }}>{success}</div>}
+
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <div>
+            <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Full Name</label>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+              style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid var(--gray-300)', outline: 'none' }}
+              placeholder="Enter your full name"
+            />
+          </div>
+
+          <div>
+            <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Email Address</label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid var(--gray-300)', outline: 'none' }}
+              placeholder="student@example.com"
+            />
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+            <div>
+              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Phone Number</label>
+              <input
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                required
+                style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid var(--gray-300)', outline: 'none' }}
+                placeholder="+91 XXXXX XXXXX"
+              />
+            </div>
+            <div>
+              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>State</label>
+              <input
+                type="text"
+                name="state"
+                value={formData.state}
+                onChange={handleChange}
+                required
+                style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid var(--gray-300)', outline: 'none' }}
+                placeholder="Your state"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>District/City</label>
+            <input
+              type="text"
+              name="district"
+              value={formData.district}
+              onChange={handleChange}
+              required
+              style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid var(--gray-300)', outline: 'none' }}
+              placeholder="Your district or city"
+            />
+          </div>
+
+          <div>
+            <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Password</label>
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+              style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid var(--gray-300)', outline: 'none' }}
+              placeholder="Create a strong password"
+            />
+          </div>
+
+          <div>
+            <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Confirm Password</label>
+            <input
+              type="password"
+              name="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              required
+              style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid var(--gray-300)', outline: 'none' }}
+              placeholder="Confirm your password"
+            />
+          </div>
+
+          <button type="submit" className="btn btn-primary" style={{ width: '100%', padding: '0.75rem', marginTop: '0.5rem', fontSize: '1rem' }}>Create Account</button>
+        </form>
+
+        <div style={{ textAlign: 'center', marginTop: '1.5rem', paddingTop: '1.5rem', borderTop: '1px solid var(--gray-200)' }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>
+            Already have an account?{' '}
+            <Link to="/signin" style={{ color: 'var(--primary)', textDecoration: 'none', fontWeight: 500 }}>
+              Sign in here
+            </Link>
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function LandingPage() {
+  return (
+    <div style={{ 
+      display: 'flex', 
+      height: '100vh', 
+      width: '100vw', 
+      alignItems: 'center', 
+      justifyContent: 'center', 
+      background: 'linear-gradient(135deg, var(--primary), var(--secondary))',
+      color: 'white'
+    }}>
+      <div style={{ textAlign: 'center', maxWidth: '600px', padding: '2rem' }}>
+        <div className="avatar" style={{ 
+          backgroundColor: 'rgba(255, 255, 255, 0.2)', 
+          width: '80px', 
+          height: '80px', 
+          margin: '0 auto 2rem', 
+          fontSize: '2.5rem',
+          backdropFilter: 'blur(10px)'
+        }}>
+          U
+        </div>
+        
+        <h1 style={{ 
+          fontSize: '3rem', 
+          fontWeight: 700, 
+          marginBottom: '1rem',
+          textShadow: '0 2px 4px rgba(0,0,0,0.3)'
+        }}>
+          Welcome to Univex Portal
+        </h1>
+        
+        <p style={{ 
+          fontSize: '1.2rem', 
+          marginBottom: '3rem', 
+          opacity: 0.9,
+          lineHeight: 1.6
+        }}>
+          Your gateway to engineering admissions. Apply for JEE Main and COMEDK programs with ease.
+          Access rural support services, track applications, and manage your educational journey.
+        </p>
+        
+        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <Link 
+            to="/signin" 
+            className="btn btn-primary" 
+            style={{ 
+              padding: '1rem 2rem', 
+              fontSize: '1.1rem', 
+              fontWeight: 600,
+              backgroundColor: 'white',
+              color: 'var(--primary)',
+              border: 'none',
+              textDecoration: 'none',
+              display: 'inline-block',
+              borderRadius: '0.5rem',
+              boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+              transition: 'all 0.3s ease'
+            }}
+          >
+            Sign In
+          </Link>
+          
+          <Link 
+            to="/register" 
+            className="btn btn-outline" 
+            style={{ 
+              padding: '1rem 2rem', 
+              fontSize: '1.1rem', 
+              fontWeight: 600,
+              backgroundColor: 'transparent',
+              color: 'white',
+              border: '2px solid white',
+              textDecoration: 'none',
+              display: 'inline-block',
+              borderRadius: '0.5rem',
+              boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+              transition: 'all 0.3s ease'
+            }}
+          >
+            Create Account
+          </Link>
+        </div>
+        
+        <div style={{ marginTop: '3rem', opacity: 0.8 }}>
+          <p style={{ fontSize: '0.9rem', marginBottom: '0.5rem' }}>
+            🎓 Engineering Admissions Portal
+          </p>
+          <p style={{ fontSize: '0.9rem' }}>
+            🌾 Rural Student Support Services
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function JEEMain() {
+  return (
+    <div>
+      <Topbar />
+      <div style={{ textAlign: 'center', marginBottom: '3rem', padding: '3rem', background: 'linear-gradient(135deg, var(--primary), var(--secondary))', borderRadius: 'var(--radius-lg)', color: 'white' }}>
+        <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>JEE Main 2025</h1>
+        <p style={{ fontSize: '1.2rem', marginBottom: '2rem' }}>Joint Entrance Examination - Main for Engineering Admissions</p>
+        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <a 
+            href="https://jeemain.nta.nic.in/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="btn" 
+            style={{ backgroundColor: 'white', color: 'var(--primary)', textDecoration: 'none', padding: '1rem 2rem', borderRadius: 'var(--radius-md)', fontWeight: '600', fontSize: '1.1rem' }}
+          >
+            Official JEE Main Website
+          </a>
+          <a 
+            href="https://jeemain.nta.nic.in/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="btn" 
+            style={{ backgroundColor: 'rgba(255,255,255,0.2)', color: 'white', textDecoration: 'none', padding: '1rem 2rem', borderRadius: 'var(--radius-md)', fontWeight: '600', fontSize: '1.1rem', border: '2px solid white' }}
+          >
+            Register Now
+          </a>
+        </div>
+      </div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', marginBottom: '3rem' }}>
+        <div className="card">
+          <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', color: 'var(--primary)' }}>Exam Pattern</h3>
+          <ul style={{ listStyle: 'none', padding: 0 }}>
+            <li style={{ padding: '0.5rem 0', borderBottom: '1px solid rgba(0,217,255,0.2)' }}>• 3 Papers: Paper 1 (B.E./B.Tech), Paper 2A (B.Arch), Paper 2B (B.Planning)</li>
+            <li style={{ padding: '0.5rem 0', borderBottom: '1px solid rgba(0,217,255,0.2)' }}>• 90 questions per paper (30 each in Physics, Chemistry, Mathematics)</li>
+            <li style={{ padding: '0.5rem 0', borderBottom: '1px solid rgba(0,217,255,0.2)' }}>• 4 marks for correct answer, -1 for incorrect</li>
+            <li style={{ padding: '0.5rem 0' }}>• Duration: 3 hours per paper</li>
+          </ul>
+        </div>
+
+        <div className="card">
+          <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', color: 'var(--primary)' }}>Important Dates</h3>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div style={{ padding: '1rem', backgroundColor: 'rgba(0,217,255,0.1)', borderRadius: 'var(--radius-md)' }}>
+              <strong>Session 1 Registration:</strong> November - December 2024
+            </div>
+            <div style={{ padding: '1rem', backgroundColor: 'rgba(0,217,255,0.1)', borderRadius: 'var(--radius-md)' }}>
+              <strong>Session 1 Exam:</strong> January 2025
+            </div>
+            <div style={{ padding: '1rem', backgroundColor: 'rgba(0,217,255,0.1)', borderRadius: 'var(--radius-md)' }}>
+              <strong>Session 2 Registration:</strong> February - March 2025
+            </div>
+            <div style={{ padding: '1rem', backgroundColor: 'rgba(0,217,255,0.1)', borderRadius: 'var(--radius-md)' }}>
+              <strong>Session 2 Exam:</strong> April 2025
+            </div>
+          </div>
+        </div>
+
+        <div className="card">
+          <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', color: 'var(--primary)' }}>Eligibility Criteria</h3>
+          <ul style={{ listStyle: 'none', padding: 0 }}>
+            <li style={{ padding: '0.5rem 0', borderBottom: '1px solid rgba(0,217,255,0.2)' }}>• Passed 10+2 or equivalent with Physics, Chemistry, Mathematics</li>
+            <li style={{ padding: '0.5rem 0', borderBottom: '1px solid rgba(0,217,255,0.2)' }}>• Minimum 75% marks (65% for SC/ST) in 12th</li>
+            <li style={{ padding: '0.5rem 0', borderBottom: '1px solid rgba(0,217,255,0.2)' }}>• No age limit for JEE Main</li>
+            <li style={{ padding: '0.5rem 0' }}>• Maximum 3 attempts allowed</li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="card" style={{ textAlign: 'center' }}>
+        <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', color: 'var(--primary)' }}>Start Your JEE Main Preparation</h3>
+        <p style={{ marginBottom: '2rem', color: 'var(--text-muted)' }}>Access our comprehensive study materials, mock tests, and expert guidance</p>
+        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <Link to="/mock-tests" className="btn btn-primary" style={{ textDecoration: 'none' }}>Take Mock Tests</Link>
+          <Link to="/applications" className="btn btn-outline" style={{ textDecoration: 'none' }}>Apply for Colleges</Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function COMEDK() {
+  return (
+    <div>
+      <Topbar />
+      <div style={{ textAlign: 'center', marginBottom: '3rem', padding: '3rem', background: 'linear-gradient(135deg, var(--secondary), var(--primary))', borderRadius: 'var(--radius-lg)', color: 'white' }}>
+        <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>COMEDK UGET 2025</h1>
+        <p style={{ fontSize: '1.2rem', marginBottom: '2rem' }}>Consortium of Medical, Engineering and Dental Colleges of Karnataka</p>
+        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <a 
+            href="https://www.comedk.org/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="btn" 
+            style={{ backgroundColor: 'white', color: 'var(--secondary)', textDecoration: 'none', padding: '1rem 2rem', borderRadius: 'var(--radius-md)', fontWeight: '600', fontSize: '1.1rem' }}
+          >
+            Official COMEDK Website
+          </a>
+          <a 
+            href="https://www.comedk.org/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="btn" 
+            style={{ backgroundColor: 'rgba(255,255,255,0.2)', color: 'white', textDecoration: 'none', padding: '1rem 2rem', borderRadius: 'var(--radius-md)', fontWeight: '600', fontSize: '1.1rem', border: '2px solid white' }}
+          >
+            Register Now
+          </a>
+        </div>
+      </div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', marginBottom: '3rem' }}>
+        <div className="card">
+          <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', color: 'var(--secondary)' }}>Exam Pattern</h3>
+          <ul style={{ listStyle: 'none', padding: 0 }}>
+            <li style={{ padding: '0.5rem 0', borderBottom: '1px solid rgba(255,0,110,0.2)' }}>• Single Paper for Engineering (UGET)</li>
+            <li style={{ padding: '0.5rem 0', borderBottom: '1px solid rgba(255,0,110,0.2)' }}>• 180 questions (60 each in Physics, Chemistry, Mathematics)</li>
+            <li style={{ padding: '0.5rem 0', borderBottom: '1px solid rgba(255,0,110,0.2)' }}>• 1 mark for correct answer, no negative marking</li>
+            <li style={{ padding: '0.5rem 0' }}>• Duration: 3 hours</li>
+          </ul>
+        </div>
+
+        <div className="card">
+          <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', color: 'var(--secondary)' }}>Important Dates</h3>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div style={{ padding: '1rem', backgroundColor: 'rgba(255,0,110,0.1)', borderRadius: 'var(--radius-md)' }}>
+              <strong>Registration Starts:</strong> January 2025
+            </div>
+            <div style={{ padding: '1rem', backgroundColor: 'rgba(255,0,110,0.1)', borderRadius: 'var(--radius-md)' }}>
+              <strong>Last Date to Apply:</strong> April 2025
+            </div>
+            <div style={{ padding: '1rem', backgroundColor: 'rgba(255,0,110,0.1)', borderRadius: 'var(--radius-md)' }}>
+              <strong>Exam Date:</strong> May 2025
+            </div>
+            <div style={{ padding: '1rem', backgroundColor: 'rgba(255,0,110,0.1)', borderRadius: 'var(--radius-md)' }}>
+              <strong>Results:</strong> June 2025
+            </div>
+          </div>
+        </div>
+
+        <div className="card">
+          <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', color: 'var(--secondary)' }}>Eligibility Criteria</h3>
+          <ul style={{ listStyle: 'none', padding: 0 }}>
+            <li style={{ padding: '0.5rem 0', borderBottom: '1px solid rgba(255,0,110,0.2)' }}>• Passed 10+2 or equivalent with PCM</li>
+            <li style={{ padding: '0.5rem 0', borderBottom: '1px solid rgba(255,0,110,0.2)' }}>• Minimum 45% marks in PCM (40% for SC/ST/OBC)</li>
+            <li style={{ padding: '0.5rem 0', borderBottom: '1px solid rgba(255,0,110,0.2)' }}>• No age limit</li>
+            <li style={{ padding: '0.5rem 0' }}>• Karnataka students get preference</li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="card" style={{ textAlign: 'center' }}>
+        <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', color: 'var(--secondary)' }}>Participating Colleges</h3>
+        <p style={{ marginBottom: '2rem', color: 'var(--text-muted)' }}>190+ engineering colleges in Karnataka participate in COMEDK</p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
+          <div style={{ padding: '1rem', backgroundColor: 'rgba(255,0,110,0.1)', borderRadius: 'var(--radius-md)' }}>
+            <strong>RV College of Engineering</strong>
+          </div>
+          <div style={{ padding: '1rem', backgroundColor: 'rgba(255,0,110,0.1)', borderRadius: 'var(--radius-md)' }}>
+            <strong>MS Ramaiah Institute</strong>
+          </div>
+          <div style={{ padding: '1rem', backgroundColor: 'rgba(255,0,110,0.1)', borderRadius: 'var(--radius-md)' }}>
+            <strong>BMS College of Engineering</strong>
+          </div>
+          <div style={{ padding: '1rem', backgroundColor: 'rgba(255,0,110,0.1)', borderRadius: 'var(--radius-md)' }}>
+            <strong>SJCE Mysore</strong>
+          </div>
+        </div>
+        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <Link to="/mock-tests" className="btn btn-primary" style={{ textDecoration: 'none' }}>Take Mock Tests</Link>
+          <Link to="/applications" className="btn btn-outline" style={{ textDecoration: 'none' }}>Apply for Colleges</Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Scholarships() {
+  const { t } = useLanguage();
+  return (
+    <div>
+      <Topbar />
+      <div style={{ padding: '2rem' }}>
+        <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>{t('scholarships')}</h1>
+        <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>Scholarship programs available for rural students pursuing engineering education.</p>
+        
+        <div className="card-grid">
+          <div className="card">
+            <div className="card-header">
+              <div className="card-icon">
+                <ShieldCheck size={24} />
+              </div>
+              <div className="card-title">Government Scholarships</div>
+            </div>
+            <div className="card-content">
+              <p>Central and state government scholarship schemes for SC/ST/OBC students.</p>
+              <ul style={{ marginTop: '1rem', fontSize: '0.875rem' }}>
+                <li>Post Matric Scholarship</li>
+                <li>National Scholarship Portal</li>
+                <li>State Merit Scholarships</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="card">
+            <div className="card-header">
+              <div className="card-icon" style={{ color: 'var(--secondary)', backgroundColor: 'rgba(255, 0, 110, 0.1)' }}>
+                <BookOpen size={24} />
+              </div>
+              <div className="card-title">Private Scholarships</div>
+            </div>
+            <div className="card-content">
+              <p>Scholarships from private organizations and NGOs for rural students.</p>
+              <ul style={{ marginTop: '1rem', fontSize: '0.875rem' }}>
+                <li>Foundation Scholarships</li>
+                <li>Corporate Social Responsibility</li>
+                <li>Alumni Scholarships</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Helplines() {
+  const { t } = useLanguage();
+  return (
+    <div>
+      <Topbar />
+      <div style={{ padding: '2rem' }}>
+        <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>{t('helplines')}</h1>
+        <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>24/7 support helplines for rural students.</p>
+        
+        <div className="card">
+          <div style={{ padding: '1.5rem' }}>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: 600, marginBottom: '1rem' }}>Emergency Helplines</h3>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+              <div>
+                <strong>Admission Helpline:</strong><br />
+                1800-XXX-XXXX<br />
+                (Mon-Sat, 9AM-6PM)
+              </div>
+              <div>
+                <strong>Technical Support:</strong><br />
+                1800-YYY-YYYY<br />
+                (24/7 Available)
+              </div>
+              <div>
+                <strong>Scholarship Queries:</strong><br />
+                1800-ZZZ-ZZZZ<br />
+                (Mon-Fri, 10AM-5PM)
+              </div>
+              <div>
+                <strong>General Support:</strong><br />
+                support@univex.edu.in
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function CoachingCenters() {
+  const { t } = useLanguage();
+  return (
+    <div>
+      <Topbar />
+      <div style={{ padding: '2rem' }}>
+        <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>{t('coachingCenters')}</h1>
+        <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>Find coaching centers near your location for JEE/COMEDK preparation.</p>
+        
+        <div className="card-grid">
+          <div className="card">
+            <div className="card-header">
+              <div className="card-icon">
+                <BookOpen size={24} />
+              </div>
+              <div className="card-title">Bengaluru Region</div>
+            </div>
+            <div className="card-content">
+              <p>Coaching centers in and around Bengaluru for comprehensive JEE preparation.</p>
+              <ul style={{ marginTop: '1rem', fontSize: '0.875rem' }}>
+                <li>Aakash Institute - Multiple locations</li>
+                <li>Allen Career Institute</li>
+                <li>Local coaching centers with scholarships</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="card">
+            <div className="card-header">
+              <div className="card-icon" style={{ color: 'var(--secondary)', backgroundColor: 'rgba(255, 0, 110, 0.1)' }}>
+                <BookOpen size={24} />
+              </div>
+              <div className="card-title">Mysore Region</div>
+            </div>
+            <div className="card-content">
+              <p>Affordable coaching options in Mysore and surrounding areas.</p>
+              <ul style={{ marginTop: '1rem', fontSize: '0.875rem' }}>
+                <li>SJCE Study Center</li>
+                <li>Government aided coaching</li>
+                <li>Community learning centers</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Transportation() {
+  const { t } = useLanguage();
+  return (
+    <div>
+      <Topbar />
+      <div style={{ padding: '2rem' }}>
+        <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>{t('transportation')}</h1>
+        <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>Transportation guides and subsidies for rural students.</p>
+        
+        <div className="card">
+          <div style={{ padding: '1.5rem' }}>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: 600, marginBottom: '1rem' }}>Travel Options</h3>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+              <div>
+                <strong>Bus Services:</strong><br />
+                KSRTC concessional fares for students<br />
+                Special routes to exam centers
+              </div>
+              <div>
+                <strong>Railway Concessions:</strong><br />
+                Student PNR tickets<br />
+                Group travel discounts
+              </div>
+              <div>
+                <strong>Air Travel:</strong><br />
+                Subsidized domestic flights<br />
+                Student fare schemes
+              </div>
+              <div>
+                <strong>Local Transport:</strong><br />
+                Auto-rickshaw services<br />
+                Shared transportation
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function CommunityForum() {
+  const { t } = useLanguage();
+  return (
+    <div>
+      <Topbar />
+      <div style={{ padding: '2rem' }}>
+        <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>{t('communityForum')}</h1>
+        <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>Connect with other rural students and share experiences.</p>
+        
+        <div className="card">
+          <div style={{ padding: '1.5rem' }}>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: 600, marginBottom: '1rem' }}>Discussion Topics</h3>
+            <div style={{ display: 'grid', gap: '1rem' }}>
+              <div style={{ padding: '1rem', border: '1px solid var(--gray-200)', borderRadius: 'var(--radius-md)' }}>
+                <strong>Study Tips for Rural Students</strong><br />
+                <span style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>Share your study strategies and resources</span>
+              </div>
+              <div style={{ padding: '1rem', border: '1px solid var(--gray-200)', borderRadius: 'var(--radius-md)' }}>
+                <strong>Scholarship Success Stories</strong><br />
+                <span style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>Inspiring stories from fellow students</span>
+              </div>
+              <div style={{ padding: '1rem', border: '1px solid var(--gray-200)', borderRadius: 'var(--radius-md)' }}>
+                <strong>Exam Preparation Groups</strong><br />
+                <span style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>Join study groups in your region</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ComputerLiteracy() {
+  const { t } = useLanguage();
+  return (
+    <div>
+      <Topbar />
+      <div style={{ padding: '2rem' }}>
+        <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>{t('computerLiteracy')}</h1>
+        <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>Basic computer skills and online application tutorials.</p>
+        
+        <div className="card-grid">
+          <div className="card">
+            <div className="card-header">
+              <div className="card-icon">
+                <BookOpen size={24} />
+              </div>
+              <div className="card-title">Basic Computer Skills</div>
+            </div>
+            <div className="card-content">
+              <p>Learn essential computer skills for online applications.</p>
+              <ul style={{ marginTop: '1rem', fontSize: '0.875rem' }}>
+                <li>Using web browsers</li>
+                <li>Filling online forms</li>
+                <li>Uploading documents</li>
+                <li>Basic troubleshooting</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="card">
+            <div className="card-header">
+              <div className="card-icon" style={{ color: 'var(--secondary)', backgroundColor: 'rgba(255, 0, 110, 0.1)' }}>
+                <BookOpen size={24} />
+              </div>
+              <div className="card-title">Video Tutorials</div>
+            </div>
+            <div className="card-content">
+              <p>Step-by-step video guides in local languages.</p>
+              <ul style={{ marginTop: '1rem', fontSize: '0.875rem' }}>
+                <li>Hindi video tutorials</li>
+                <li>Kannada language support</li>
+                <li>Offline downloadable guides</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function OfflineForms() {
+  const { t } = useLanguage();
+  return (
+    <div>
+      <Topbar />
+      <div style={{ padding: '2rem' }}>
+        <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>{t('offlineForms')}</h1>
+        <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>Download application forms for offline submission.</p>
+        
+        <div className="card">
+          <div style={{ padding: '1.5rem' }}>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: 600, marginBottom: '1rem' }}>Available Forms</h3>
+            <div style={{ display: 'grid', gap: '1rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem', border: '1px solid var(--gray-200)', borderRadius: 'var(--radius-md)' }}>
+                <div>
+                  <strong>JEE Main Application Form</strong><br />
+                  <span style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>PDF format, 2.5 MB</span>
+                </div>
+                <button className="btn btn-primary" onClick={() => alert('Downloading JEE Main form...')}>{t('downloadForm')}</button>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem', border: '1px solid var(--gray-200)', borderRadius: 'var(--radius-md)' }}>
+                <div>
+                  <strong>COMEDK Application Form</strong><br />
+                  <span style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>PDF format, 1.8 MB</span>
+                </div>
+                <button className="btn btn-primary" onClick={() => alert('Downloading COMEDK form...')}>{t('downloadForm')}</button>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem', border: '1px solid var(--gray-200)', borderRadius: 'var(--radius-md)' }}>
+                <div>
+                  <strong>Scholarship Application</strong><br />
+                  <span style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>PDF format, 1.2 MB</span>
+                </div>
+                <button className="btn btn-primary" onClick={() => alert('Downloading scholarship form...')}>{t('downloadForm')}</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -1099,29 +2101,43 @@ function Login({ onLogin }) {
 function App() {
   const [user, setUser] = useState(null);
 
-  if (!user) {
-    return <Login onLogin={(user) => setUser(user)} />;
-  }
-
   return (
     <Router>
-      <div className="app-container">
-        <Sidebar onLogout={() => setUser(null)} />
-        <main className="main-content">
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/applications" element={<Applications />} />
-            <Route path="/merit-list" element={<MeritList />} />
-            <Route path="/cutoff-prediction" element={<CutoffPrediction />} />
-            <Route path="/seat-allocation" element={<SeatAllocation />} />
-            <Route path="/payments" element={<PaymentHistory />} />
-            <Route path="/exams" element={<EntranceExams />} />
-            <Route path="/mock-tests" element={<MockTests />} />
-            <Route path="/documents" element={<Documents />} />
-            <Route path="/settings" element={<SettingsPage />} />
-          </Routes>
-        </main>
-      </div>
+      {!user ? (
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/signin" element={<Login onLogin={(user) => setUser(user)} />} />
+          <Route path="/register" element={<Register onRegister={(user) => setUser(user)} />} />
+        </Routes>
+      ) : (
+        <div className="app-container">
+          <Sidebar onLogout={() => setUser(null)} />
+          <main className="main-content">
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/applications" element={<Applications />} />
+              <Route path="/jee-main" element={<JEEMain />} />
+              <Route path="/comedk" element={<COMEDK />} />
+              <Route path="/merit-list" element={<MeritList />} />
+              <Route path="/cutoff-prediction" element={<CutoffPrediction />} />
+              <Route path="/seat-allocation" element={<SeatAllocation />} />
+              <Route path="/payments" element={<PaymentHistory />} />
+              <Route path="/exams" element={<EntranceExams />} />
+              <Route path="/mock-tests" element={<MockTests />} />
+              <Route path="/documents" element={<Documents />} />
+              <Route path="/settings" element={<SettingsPage />} />
+              {/* Rural Support Routes */}
+              <Route path="/scholarships" element={<Scholarships />} />
+              <Route path="/helplines" element={<Helplines />} />
+              <Route path="/coaching-centers" element={<CoachingCenters />} />
+              <Route path="/transportation" element={<Transportation />} />
+              <Route path="/community-forum" element={<CommunityForum />} />
+              <Route path="/computer-literacy" element={<ComputerLiteracy />} />
+              <Route path="/offline-forms" element={<OfflineForms />} />
+            </Routes>
+          </main>
+        </div>
+      )}
     </Router>
   );
 }
